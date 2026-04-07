@@ -1,7 +1,12 @@
 aid: stonex
-url: https://raw.githubusercontent.com/api-evangelist/stonex/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/stonex/refs/heads/main/apis.yml
 modified: '2026-03-21'
 apis: []
 common:
   - type: Website
     url: https://www.stonex.com
+description: >-
+  StoneX Group is a global financial services organization that provides execution,
+  risk management, market intelligence, and post-trade services across asset classes
+  and markets to institutional, commercial, and retail clients.
