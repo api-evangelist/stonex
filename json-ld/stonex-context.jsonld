@@ -1,0 +1,35 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "stonex": "https://www.stonex.com/vocab#",
+    "fibo": "https://spec.edmcouncil.org/fibo/ontology/",
+
+    "Payment": "stonex:Payment",
+    "ClearingAccount": "stonex:ClearingAccount",
+    "Trade": "stonex:Trade",
+    "Position": "stonex:Position",
+    "Balance": "stonex:Balance",
+    "Beneficiary": "stonex:Beneficiary",
+    "FxRate": "stonex:FxRate",
+
+    "sell_currency": "stonex:sellCurrency",
+    "buy_currency": "stonex:buyCurrency",
+    "exchange_rate": "stonex:exchangeRate",
+    "buy_amount": "stonex:buyAmount",
+    "payment_reference": "stonex:paymentReference",
+    "value_date": "stonex:valueDate",
+    "bank_code": "stonex:bankCode",
+    "account_number": "stonex:accountNumber",
+    "cash_balance": "stonex:cashBalance",
+    "margin_used": "stonex:marginUsed",
+    "margin_available": "stonex:marginAvailable",
+    "unrealized_pnl": "stonex:unrealizedPnl",
+    "realized_pnl": "stonex:realizedPnl",
+
+    "name": "name",
+    "status": "stonex:status",
+    "currency": "currency",
+    "country": "addressCountry",
+    "created_at": "dateCreated"
+  }
+}

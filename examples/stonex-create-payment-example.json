@@ -1,0 +1,44 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://fx-api.payments.stonex.com/payments",
+    "headers": {
+      "Authorization": "Bearer YOUR_ACCESS_TOKEN",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "amount": 50000.00,
+      "sell_currency": "USD",
+      "buy_currency": "EUR",
+      "beneficiary": {
+        "name": "Acme GmbH",
+        "country": "DE",
+        "account_number": "DE89370400440532013000",
+        "bank_code": "DEUTDEDB"
+      },
+      "payment_reference": "Invoice-INV-2026-0501",
+      "value_date": "2026-05-04"
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "id": "pmt-stonex-abc123def456",
+      "status": "pending",
+      "amount": 50000.00,
+      "sell_currency": "USD",
+      "buy_currency": "EUR",
+      "exchange_rate": 0.9234,
+      "buy_amount": 46170.00,
+      "payment_reference": "Invoice-INV-2026-0501",
+      "created_at": "2026-05-02T10:30:00Z",
+      "value_date": "2026-05-04",
+      "beneficiary": {
+        "name": "Acme GmbH",
+        "country": "DE",
+        "account_number": "DE89370400440532013000",
+        "bank_code": "DEUTDEDB"
+      }
+    }
+  }
+}

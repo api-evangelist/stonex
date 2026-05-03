@@ -1,0 +1,75 @@
+extends: spectral:oas
+rules:
+  stonex-bearer-auth-required:
+    description: >-
+      All StoneX API operations must use Bearer JWT authentication.
+    message: "Operations must declare BearerAuth security scheme."
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      field: BearerAuth
+      function: defined
+
+  stonex-response-200-or-201-required:
+    description: All StoneX operations must define a 2xx success response.
+    message: "Operation must define a 200 or 201 response."
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          properties:
+            responses:
+              type: object
+
+  stonex-operationid-camel-case:
+    description: OperationIds must use camelCase.
+    message: "OperationId '{{value}}' must be camelCase."
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  stonex-tags-title-case:
+    description: All operation tags must use Title Case.
+    message: "Tag '{{value}}' must use Title Case."
+    severity: warn
+    given: "$.paths[*][*].tags[*]"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9 &-]*$"
+
+  stonex-server-https:
+    description: All StoneX API servers must use HTTPS with TLS 1.3.
+    message: "Server URL must use HTTPS."
+    severity: error
+    given: "$.servers[*].url"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://"
+
+  stonex-iso-currency-description:
+    description: >-
+      Currency parameters must reference ISO 4217 in their description
+      to ensure standardized currency code usage.
+    message: "Currency parameter must mention ISO 4217."
+    severity: info
+    given: "$.paths[*][*].parameters[?(@.name =~ /currency/i)]"
+    then:
+      field: description
+      function: truthy
+
+  stonex-path-parameters-kebab-case:
+    description: Path segments (not parameters) should use kebab-case.
+    message: "Path '{{path}}' contains uppercase characters."
+    severity: warn
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[/a-z0-9{}_-]*$"

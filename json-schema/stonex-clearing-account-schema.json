@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.clearing.stonex.com/schema/account",
+  "title": "StoneX Clearing Account",
+  "description": "An institutional clearing account managed through the StoneX Clearing API.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "description": "Account identifier." },
+    "name": { "type": "string", "description": "Account name." },
+    "account_type": { "type": "string", "description": "Account type classification." },
+    "status": { "type": "string", "enum": ["active", "inactive", "suspended"] },
+    "currency": { "type": "string", "description": "Base currency (ISO 4217)." },
+    "created_at": { "type": "string", "format": "date-time" }
+  },
+  "required": ["id", "name", "status"]
+}

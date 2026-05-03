@@ -1,0 +1,326 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: StoneX Clearing API
+  description: >-
+    StoneX Clearing REST API for institutional account management, trade
+    submission, position tracking, and document retrieval.
+  tags:
+    - Clearing
+    - Trading
+    - Accounts
+    - Finance
+    - Institutional
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      STONEX_CLEARING_CLIENT_ID: STONEX_CLEARING_CLIENT_ID
+      STONEX_CLEARING_CLIENT_SECRET: STONEX_CLEARING_CLIENT_SECRET
+      STONEX_CLEARING_ACCESS_TOKEN: STONEX_CLEARING_ACCESS_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: stonex-clearing
+      baseUri: https://api.clearing.stonex.com
+      description: StoneX Clearing API for institutional account and trade management.
+      authentication:
+        type: bearer
+        token: "{{STONEX_CLEARING_ACCESS_TOKEN}}"
+      resources:
+        - name: accounts
+          path: /accounts
+          description: Clearing account management.
+          operations:
+            - name: list-accounts
+              method: GET
+              description: List clearing accounts accessible to the client.
+              inputParameters:
+                - name: page
+                  in: query
+                  type: integer
+                  required: false
+                  description: Page number.
+                - name: page_size
+                  in: query
+                  type: integer
+                  required: false
+                  description: Results per page.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: account
+          path: /accounts/{accountId}
+          description: Individual account operations.
+          operations:
+            - name: get-account
+              method: GET
+              description: Get details of a specific clearing account.
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                  description: Account identifier.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: account-positions
+          path: /accounts/{accountId}/positions
+          description: Account position data.
+          operations:
+            - name: get-account-positions
+              method: GET
+              description: Get current positions for a clearing account.
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                  description: Account identifier.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: account-balances
+          path: /accounts/{accountId}/balances
+          description: Account balance data.
+          operations:
+            - name: get-account-balances
+              method: GET
+              description: Get cash, margin, and P&L balances for an account.
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                  description: Account identifier.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: trades
+          path: /trades
+          description: Trade submission and listing.
+          operations:
+            - name: submit-trade
+              method: POST
+              description: Submit a trade for clearing and settlement.
+              body:
+                type: json
+                data:
+                  account_id: "{{tools.account_id}}"
+                  symbol: "{{tools.symbol}}"
+                  side: "{{tools.side}}"
+                  quantity: "{{tools.quantity}}"
+                  price: "{{tools.price}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: list-trades
+              method: GET
+              description: List trades with optional account and status filters.
+              inputParameters:
+                - name: account_id
+                  in: query
+                  type: string
+                  required: false
+                  description: Filter by account.
+                - name: status
+                  in: query
+                  type: string
+                  required: false
+                  description: Filter by status.
+                - name: from_date
+                  in: query
+                  type: string
+                  required: false
+                  description: Start date filter.
+                - name: to_date
+                  in: query
+                  type: string
+                  required: false
+                  description: End date filter.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: documents
+          path: /documents
+          description: Clearing document management.
+          operations:
+            - name: list-documents
+              method: GET
+              description: List clearing documents.
+              inputParameters:
+                - name: account_id
+                  in: query
+                  type: string
+                  required: false
+                  description: Filter by account.
+                - name: document_type
+                  in: query
+                  type: string
+                  required: false
+                  description: Filter by document type.
+                - name: from_date
+                  in: query
+                  type: string
+                  required: false
+                  description: Start date filter.
+                - name: to_date
+                  in: query
+                  type: string
+                  required: false
+                  description: End date filter.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8102
+      namespace: stonex-clearing-rest
+      resources:
+        - path: /v1/accounts
+          name: accounts
+          description: Clearing accounts.
+          operations:
+            - method: GET
+              name: list-accounts
+              description: List clearing accounts.
+              call: "stonex-clearing.list-accounts"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/accounts/{accountId}/positions
+          name: positions
+          description: Account positions.
+          operations:
+            - method: GET
+              name: get-account-positions
+              description: Get positions for a clearing account.
+              call: "stonex-clearing.get-account-positions"
+              with:
+                accountId: "rest.accountId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/trades
+          name: trades
+          description: Trade management.
+          operations:
+            - method: POST
+              name: submit-trade
+              description: Submit a trade for clearing.
+              call: "stonex-clearing.submit-trade"
+              with:
+                account_id: "rest.account_id"
+                symbol: "rest.symbol"
+                side: "rest.side"
+                quantity: "rest.quantity"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9102
+      namespace: stonex-clearing-mcp
+      transport: http
+      tools:
+        - name: list-accounts
+          description: List clearing accounts accessible to the client.
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "stonex-clearing.list-accounts"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-account-positions
+          description: Get current positions for a clearing account.
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "stonex-clearing.get-account-positions"
+          with:
+            accountId: "tools.accountId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-account-balances
+          description: Get cash, margin, and P&L balances for a clearing account.
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "stonex-clearing.get-account-balances"
+          with:
+            accountId: "tools.accountId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: submit-trade
+          description: Submit a trade for clearing and settlement.
+          hints:
+            readOnly: false
+          call: "stonex-clearing.submit-trade"
+          with:
+            account_id: "tools.account_id"
+            symbol: "tools.symbol"
+            side: "tools.side"
+            quantity: "tools.quantity"
+            price: "tools.price"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-trades
+          description: List trades with account and date filters.
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "stonex-clearing.list-trades"
+          with:
+            account_id: "tools.account_id"
+            status: "tools.status"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-documents
+          description: List clearing documents for an account.
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "stonex-clearing.list-documents"
+          with:
+            account_id: "tools.account_id"
+            document_type: "tools.document_type"
+          outputParameters:
+            - type: object
+              mapping: "$."

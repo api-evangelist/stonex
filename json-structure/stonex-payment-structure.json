@@ -1,0 +1,25 @@
+{
+  "title": "StoneX Payment Response Structure",
+  "description": "Document structure for payment responses from the StoneX Payments REST API.",
+  "structure": {
+    "id": { "type": "string", "description": "Payment identifier." },
+    "status": { "type": "string", "description": "Payment status." },
+    "amount": { "type": "number", "description": "Source amount." },
+    "sell_currency": { "type": "string", "description": "Source currency (ISO 4217)." },
+    "buy_currency": { "type": "string", "description": "Destination currency (ISO 4217)." },
+    "exchange_rate": { "type": "number", "description": "Applied FX rate." },
+    "buy_amount": { "type": "number", "description": "Destination amount." },
+    "payment_reference": { "type": "string", "description": "Payment reference." },
+    "created_at": { "type": "string", "format": "date-time" },
+    "value_date": { "type": "string", "format": "date" },
+    "beneficiary": {
+      "type": "object",
+      "fields": {
+        "name": { "type": "string" },
+        "country": { "type": "string" },
+        "account_number": { "type": "string" },
+        "bank_code": { "type": "string" }
+      }
+    }
+  }
+}

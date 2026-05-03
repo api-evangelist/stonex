@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://fx-api.payments.stonex.com/schema/payment",
+  "title": "StoneX Payment",
+  "description": "A cross-border payment processed through the StoneX Payments API.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "description": "Unique payment identifier." },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "processing", "completed", "failed", "cancelled"],
+      "description": "Payment status."
+    },
+    "amount": { "type": "number", "description": "Source payment amount." },
+    "sell_currency": { "type": "string", "description": "Source currency (ISO 4217)." },
+    "buy_currency": { "type": "string", "description": "Destination currency (ISO 4217)." },
+    "exchange_rate": { "type": "number", "description": "Applied exchange rate." },
+    "buy_amount": { "type": "number", "description": "Amount in destination currency." },
+    "payment_reference": { "type": "string", "description": "Payment reference string." },
+    "created_at": { "type": "string", "format": "date-time" },
+    "value_date": { "type": "string", "format": "date" },
+    "beneficiary": { "$ref": "#/definitions/Beneficiary" }
+  },
+  "required": ["id", "status", "amount", "sell_currency", "buy_currency"],
+  "definitions": {
+    "Beneficiary": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "country": { "type": "string" },
+        "account_number": { "type": "string" },
+        "bank_code": { "type": "string" }
+      },
+      "required": ["name", "account_number"]
+    }
+  }
+}

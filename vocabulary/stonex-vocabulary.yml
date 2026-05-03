@@ -1,0 +1,103 @@
+vocabulary:
+  title: StoneX Vocabulary
+  description: >-
+    Domain vocabulary for StoneX Group financial services covering cross-border
+    payments, FX rates, clearing, trading, and institutional account management.
+  version: "1.0"
+  created: "2026-05-02"
+  modified: "2026-05-02"
+  source: https://developer.stonex.com/
+
+terms:
+  - term: Cross-Border Payment
+    definition: >-
+      An international funds transfer from one country to another, often
+      involving currency conversion (FX) and international settlement
+      infrastructure such as SWIFT, local payment rails, or correspondent banking.
+    aliases: [international payment, FX payment]
+    tags: [Payments, FX]
+
+  - term: Value Date
+    definition: >-
+      The date on which a financial transaction is effectively settled and
+      funds become available to the recipient.
+    aliases: [settlement date]
+    tags: [Payments, Settlement]
+
+  - term: Sell Currency
+    definition: >-
+      The source currency being debited from the sender's account in a foreign
+      exchange payment transaction.
+    tags: [FX, Payments]
+
+  - term: Buy Currency
+    definition: >-
+      The destination currency being credited to the beneficiary in a foreign
+      exchange payment transaction.
+    tags: [FX, Payments]
+
+  - term: Exchange Rate
+    definition: >-
+      The price at which one currency is converted into another. StoneX
+      provides indicative rates via the /rates endpoint and applies
+      contractual rates at payment execution.
+    tags: [FX, Pricing]
+
+  - term: Beneficiary
+    definition: >-
+      The recipient of a cross-border payment, identified by name, country,
+      bank account number, and bank routing code (BIC/SWIFT, ABA, sort code, etc.).
+    tags: [Payments, Settlement]
+
+  - term: Clearing
+    definition: >-
+      The process of reconciling buy and sell orders between trading parties
+      to determine obligations before settlement. StoneX provides institutional
+      clearing services via the Clearing API.
+    tags: [Clearing, Trading, Institutional]
+
+  - term: Settlement
+    definition: >-
+      The final transfer of securities and funds between buyer and seller,
+      completing a trade transaction.
+    tags: [Clearing, Trading]
+
+  - term: Position
+    definition: >-
+      The net quantity of a financial instrument held in a clearing account,
+      where positive values indicate long positions and negative values indicate
+      short positions.
+    aliases: [open position, holding]
+    tags: [Trading, Clearing]
+
+  - term: Margin
+    definition: >-
+      Collateral deposited by a trader with a clearing house or broker to
+      cover potential losses from open positions.
+    tags: [Trading, Risk Management]
+
+  - term: P&L (Profit and Loss)
+    definition: >-
+      The financial gain or loss from trading positions. Unrealized P&L reflects
+      open positions; realized P&L reflects closed positions.
+    aliases: [Profit and Loss, PnL]
+    tags: [Trading, Accounting]
+
+  - term: Subscription Key
+    definition: >-
+      A key issued through the StoneX Developer Storefront granting access
+      to a specific API product. Multiple products require separate subscription keys.
+    tags: [Authentication, API Management]
+
+  - term: GF API
+    definition: >-
+      The StoneX GAIN Futures (GF) API providing institutional-grade futures
+      trading capabilities including market data, order management, and account tracking.
+    aliases: [GAIN Futures API]
+    tags: [Futures, Trading, Institutional]
+
+  - term: Fortune 500
+    definition: >-
+      StoneX Group Inc. is listed among Fortune 500 companies, indicating
+      it is one of the 500 largest US corporations by revenue.
+    tags: [Corporate, Classification]
