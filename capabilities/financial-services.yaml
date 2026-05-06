@@ -1,354 +1,585 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
   label: StoneX Financial Services
-  description: >-
-    Unified financial services workflow combining StoneX cross-border payments
-    and institutional clearing operations. Enables financial institutions,
-    corporate treasuries, and institutional traders to execute FX payments,
-    monitor clearing accounts, manage positions, and submit trades through
-    a single integrated interface.
+  description: Unified financial services workflow combining StoneX cross-border payments and institutional clearing operations.
+    Enables financial institutions, corporate treasuries, and institutional traders to execute FX payments, monitor clearing
+    accounts, manage positions, and submit trades through a single integrated interface.
   tags:
-    - Finance
-    - Financial Services
-    - Payments
-    - Clearing
-    - Trading
-    - FX
-    - Institutional
-  created: "2026-05-02"
-  modified: "2026-05-02"
-
+  - Finance
+  - Financial Services
+  - Payments
+  - Clearing
+  - Trading
+  - FX
+  - Institutional
+  created: '2026-05-02'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      STONEX_PAYMENTS_CLIENT_ID: STONEX_PAYMENTS_CLIENT_ID
-      STONEX_PAYMENTS_CLIENT_SECRET: STONEX_PAYMENTS_CLIENT_SECRET
-      STONEX_PAYMENTS_ACCESS_TOKEN: STONEX_PAYMENTS_ACCESS_TOKEN
-      STONEX_CLEARING_CLIENT_ID: STONEX_CLEARING_CLIENT_ID
-      STONEX_CLEARING_CLIENT_SECRET: STONEX_CLEARING_CLIENT_SECRET
-      STONEX_CLEARING_ACCESS_TOKEN: STONEX_CLEARING_ACCESS_TOKEN
-
+- namespace: env
+  keys:
+    STONEX_PAYMENTS_CLIENT_ID: STONEX_PAYMENTS_CLIENT_ID
+    STONEX_PAYMENTS_CLIENT_SECRET: STONEX_PAYMENTS_CLIENT_SECRET
+    STONEX_PAYMENTS_ACCESS_TOKEN: STONEX_PAYMENTS_ACCESS_TOKEN
+    STONEX_CLEARING_CLIENT_ID: STONEX_CLEARING_CLIENT_ID
+    STONEX_CLEARING_CLIENT_SECRET: STONEX_CLEARING_CLIENT_SECRET
+    STONEX_CLEARING_ACCESS_TOKEN: STONEX_CLEARING_ACCESS_TOKEN
 capability:
   consumes:
-    - import: stonex-payments
-      location: ./shared/stonex-payments.yaml
-    - import: stonex-clearing
-      location: ./shared/stonex-clearing.yaml
-
+  - type: http
+    namespace: stonex-payments
+    baseUri: https://fx-api.payments.stonex.com
+    description: StoneX Payments API for cross-border payments and FX rates.
+    authentication:
+      type: bearer
+      token: '{{STONEX_PAYMENTS_ACCESS_TOKEN}}'
+    resources:
+    - name: payments
+      path: /payments
+      description: Cross-border payment creation and management.
+      operations:
+      - name: create-payment
+        method: POST
+        description: Initiate a cross-border payment in local currency.
+        body:
+          type: json
+          data:
+            amount: '{{tools.amount}}'
+            sell_currency: '{{tools.sell_currency}}'
+            buy_currency: '{{tools.buy_currency}}'
+            beneficiary:
+              name: '{{tools.beneficiary_name}}'
+              country: '{{tools.beneficiary_country}}'
+              account_number: '{{tools.account_number}}'
+              bank_code: '{{tools.bank_code}}'
+            payment_reference: '{{tools.payment_reference}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: list-payments
+        method: GET
+        description: List payments with optional status and date filters.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          required: false
+          description: Filter by payment status.
+        - name: currency
+          in: query
+          type: string
+          required: false
+          description: Filter by currency (ISO 4217).
+        - name: from_date
+          in: query
+          type: string
+          required: false
+          description: Start date filter.
+        - name: to_date
+          in: query
+          type: string
+          required: false
+          description: End date filter.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: payment
+      path: /payments/{paymentId}
+      description: Individual payment retrieval.
+      operations:
+      - name: get-payment
+        method: GET
+        description: Get details of a specific payment by ID.
+        inputParameters:
+        - name: paymentId
+          in: path
+          type: string
+          required: true
+          description: Payment identifier.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: fx-rates
+      path: /rates
+      description: Foreign exchange rates.
+      operations:
+      - name: get-fx-rates
+        method: GET
+        description: Get indicative FX rates for a currency pair.
+        inputParameters:
+        - name: sell_currency
+          in: query
+          type: string
+          required: true
+          description: Source currency (ISO 4217).
+        - name: buy_currency
+          in: query
+          type: string
+          required: true
+          description: Destination currency (ISO 4217).
+        - name: amount
+          in: query
+          type: number
+          required: false
+          description: Amount to convert.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  - type: http
+    namespace: stonex-clearing
+    baseUri: https://api.clearing.stonex.com
+    description: StoneX Clearing API for institutional account and trade management.
+    authentication:
+      type: bearer
+      token: '{{STONEX_CLEARING_ACCESS_TOKEN}}'
+    resources:
+    - name: accounts
+      path: /accounts
+      description: Clearing account management.
+      operations:
+      - name: list-accounts
+        method: GET
+        description: List clearing accounts accessible to the client.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: Page number.
+        - name: page_size
+          in: query
+          type: integer
+          required: false
+          description: Results per page.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: account
+      path: /accounts/{accountId}
+      description: Individual account operations.
+      operations:
+      - name: get-account
+        method: GET
+        description: Get details of a specific clearing account.
+        inputParameters:
+        - name: accountId
+          in: path
+          type: string
+          required: true
+          description: Account identifier.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: account-positions
+      path: /accounts/{accountId}/positions
+      description: Account position data.
+      operations:
+      - name: get-account-positions
+        method: GET
+        description: Get current positions for a clearing account.
+        inputParameters:
+        - name: accountId
+          in: path
+          type: string
+          required: true
+          description: Account identifier.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: account-balances
+      path: /accounts/{accountId}/balances
+      description: Account balance data.
+      operations:
+      - name: get-account-balances
+        method: GET
+        description: Get cash, margin, and P&L balances for an account.
+        inputParameters:
+        - name: accountId
+          in: path
+          type: string
+          required: true
+          description: Account identifier.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: trades
+      path: /trades
+      description: Trade submission and listing.
+      operations:
+      - name: submit-trade
+        method: POST
+        description: Submit a trade for clearing and settlement.
+        body:
+          type: json
+          data:
+            account_id: '{{tools.account_id}}'
+            symbol: '{{tools.symbol}}'
+            side: '{{tools.side}}'
+            quantity: '{{tools.quantity}}'
+            price: '{{tools.price}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: list-trades
+        method: GET
+        description: List trades with optional account and status filters.
+        inputParameters:
+        - name: account_id
+          in: query
+          type: string
+          required: false
+          description: Filter by account.
+        - name: status
+          in: query
+          type: string
+          required: false
+          description: Filter by status.
+        - name: from_date
+          in: query
+          type: string
+          required: false
+          description: Start date filter.
+        - name: to_date
+          in: query
+          type: string
+          required: false
+          description: End date filter.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: documents
+      path: /documents
+      description: Clearing document management.
+      operations:
+      - name: list-documents
+        method: GET
+        description: List clearing documents.
+        inputParameters:
+        - name: account_id
+          in: query
+          type: string
+          required: false
+          description: Filter by account.
+        - name: document_type
+          in: query
+          type: string
+          required: false
+          description: Filter by document type.
+        - name: from_date
+          in: query
+          type: string
+          required: false
+          description: Start date filter.
+        - name: to_date
+          in: query
+          type: string
+          required: false
+          description: End date filter.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8080
-      namespace: stonex-financial-api
-      description: >-
-        Unified REST API for StoneX cross-border payments, FX rates,
-        clearing accounts, position management, and trade operations.
-      resources:
-        - path: /v1/payments
-          name: payments
-          description: Cross-border payment initiation and tracking.
-          operations:
-            - method: POST
-              name: create-payment
-              description: Initiate a cross-border payment in 140+ currencies.
-              call: "stonex-payments.create-payment"
-              with:
-                amount: "rest.amount"
-                sell_currency: "rest.sell_currency"
-                buy_currency: "rest.buy_currency"
-                beneficiary_name: "rest.beneficiary_name"
-                account_number: "rest.account_number"
-                bank_code: "rest.bank_code"
-                payment_reference: "rest.payment_reference"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-            - method: GET
-              name: list-payments
-              description: List payments with status and date filters.
-              call: "stonex-payments.list-payments"
-              with:
-                status: "rest.status"
-                currency: "rest.currency"
-                from_date: "rest.from_date"
-                to_date: "rest.to_date"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/payments/{paymentId}
-          name: payment
-          description: Individual payment operations.
-          operations:
-            - method: GET
-              name: get-payment
-              description: Get details of a specific payment.
-              call: "stonex-payments.get-payment"
-              with:
-                paymentId: "rest.paymentId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/fx-rates
-          name: fx-rates
-          description: Foreign exchange rate queries.
-          operations:
-            - method: GET
-              name: get-fx-rates
-              description: Get indicative FX rates for a currency pair.
-              call: "stonex-payments.get-fx-rates"
-              with:
-                sell_currency: "rest.sell_currency"
-                buy_currency: "rest.buy_currency"
-                amount: "rest.amount"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/accounts
-          name: clearing-accounts
-          description: Institutional clearing accounts.
-          operations:
-            - method: GET
-              name: list-accounts
-              description: List clearing accounts.
-              call: "stonex-clearing.list-accounts"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/accounts/{accountId}/positions
-          name: positions
-          description: Account position data.
-          operations:
-            - method: GET
-              name: get-account-positions
-              description: Get current positions for a clearing account.
-              call: "stonex-clearing.get-account-positions"
-              with:
-                accountId: "rest.accountId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/accounts/{accountId}/balances
-          name: balances
-          description: Account balance data.
-          operations:
-            - method: GET
-              name: get-account-balances
-              description: Get cash, margin, and P&L balances.
-              call: "stonex-clearing.get-account-balances"
-              with:
-                accountId: "rest.accountId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/trades
-          name: trades
-          description: Trade submission and management.
-          operations:
-            - method: POST
-              name: submit-trade
-              description: Submit a trade for clearing and settlement.
-              call: "stonex-clearing.submit-trade"
-              with:
-                account_id: "rest.account_id"
-                symbol: "rest.symbol"
-                side: "rest.side"
-                quantity: "rest.quantity"
-                price: "rest.price"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-            - method: GET
-              name: list-trades
-              description: List trades with filters.
-              call: "stonex-clearing.list-trades"
-              with:
-                account_id: "rest.account_id"
-                status: "rest.status"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/documents
-          name: documents
-          description: Clearing documents.
-          operations:
-            - method: GET
-              name: list-documents
-              description: List clearing documents.
-              call: "stonex-clearing.list-documents"
-              with:
-                account_id: "rest.account_id"
-                document_type: "rest.document_type"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9090
-      namespace: stonex-financial-mcp
-      transport: http
-      description: >-
-        MCP server for AI-assisted financial operations including FX payment
-        processing, account monitoring, position management, and trade execution.
-      tools:
-        - name: payments-create-payment
-          description: >-
-            Initiate a cross-border payment through StoneX in 140+ currencies.
-            Use for corporate treasury FX payments, international supplier
-            payments, or global settlements.
-          hints:
-            readOnly: false
-          call: "stonex-payments.create-payment"
-          with:
-            amount: "tools.amount"
-            sell_currency: "tools.sell_currency"
-            buy_currency: "tools.buy_currency"
-            beneficiary_name: "tools.beneficiary_name"
-            account_number: "tools.account_number"
-            bank_code: "tools.bank_code"
-            payment_reference: "tools.payment_reference"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: payments-list-payments
-          description: >-
-            List cross-border payments with status and date filters. Use to
-            monitor payment pipeline, reconcile transactions, or generate reports.
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "stonex-payments.list-payments"
-          with:
-            status: "tools.status"
-            currency: "tools.currency"
-            from_date: "tools.from_date"
-            to_date: "tools.to_date"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: payments-get-payment
-          description: Get details and current status of a specific payment.
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "stonex-payments.get-payment"
-          with:
-            paymentId: "tools.paymentId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: payments-get-fx-rates
-          description: >-
-            Get indicative FX exchange rates for a currency pair. Use for
-            pre-payment rate discovery or treasury rate monitoring.
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "stonex-payments.get-fx-rates"
-          with:
-            sell_currency: "tools.sell_currency"
-            buy_currency: "tools.buy_currency"
-            amount: "tools.amount"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: clearing-list-accounts
-          description: >-
-            List institutional clearing accounts. Use to discover available
-            accounts for trading or reporting.
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "stonex-clearing.list-accounts"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: clearing-get-positions
-          description: >-
-            Get current open positions for a clearing account. Use for
-            risk management, P&L monitoring, or portfolio reporting.
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "stonex-clearing.get-account-positions"
-          with:
-            accountId: "tools.accountId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: clearing-get-balances
-          description: >-
-            Get cash, margin, and P&L balances for a clearing account.
-            Use for margin monitoring, risk management, or daily reconciliation.
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "stonex-clearing.get-account-balances"
-          with:
-            accountId: "tools.accountId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: clearing-submit-trade
-          description: >-
-            Submit a trade for clearing and settlement through StoneX.
-            Use for programmatic trade entry or algorithmic trading workflows.
-          hints:
-            readOnly: false
-          call: "stonex-clearing.submit-trade"
-          with:
-            account_id: "tools.account_id"
-            symbol: "tools.symbol"
-            side: "tools.side"
-            quantity: "tools.quantity"
-            price: "tools.price"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: clearing-list-trades
-          description: >-
-            List trades with account, status, and date filters. Use for
-            trade reconciliation, settlement monitoring, or reporting.
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "stonex-clearing.list-trades"
-          with:
-            account_id: "tools.account_id"
-            status: "tools.status"
-            from_date: "tools.from_date"
-            to_date: "tools.to_date"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: clearing-list-documents
-          description: >-
-            List clearing documents including trade confirmations and statements.
-            Use for compliance, audit, or client reporting.
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "stonex-clearing.list-documents"
-          with:
-            account_id: "tools.account_id"
-            document_type: "tools.document_type"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: stonex-financial-api
+    description: Unified REST API for StoneX cross-border payments, FX rates, clearing accounts, position management, and
+      trade operations.
+    resources:
+    - path: /v1/payments
+      name: payments
+      description: Cross-border payment initiation and tracking.
+      operations:
+      - method: POST
+        name: create-payment
+        description: Initiate a cross-border payment in 140+ currencies.
+        call: stonex-payments.create-payment
+        with:
+          amount: rest.amount
+          sell_currency: rest.sell_currency
+          buy_currency: rest.buy_currency
+          beneficiary_name: rest.beneficiary_name
+          account_number: rest.account_number
+          bank_code: rest.bank_code
+          payment_reference: rest.payment_reference
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: list-payments
+        description: List payments with status and date filters.
+        call: stonex-payments.list-payments
+        with:
+          status: rest.status
+          currency: rest.currency
+          from_date: rest.from_date
+          to_date: rest.to_date
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/payments/{paymentId}
+      name: payment
+      description: Individual payment operations.
+      operations:
+      - method: GET
+        name: get-payment
+        description: Get details of a specific payment.
+        call: stonex-payments.get-payment
+        with:
+          paymentId: rest.paymentId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/fx-rates
+      name: fx-rates
+      description: Foreign exchange rate queries.
+      operations:
+      - method: GET
+        name: get-fx-rates
+        description: Get indicative FX rates for a currency pair.
+        call: stonex-payments.get-fx-rates
+        with:
+          sell_currency: rest.sell_currency
+          buy_currency: rest.buy_currency
+          amount: rest.amount
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts
+      name: clearing-accounts
+      description: Institutional clearing accounts.
+      operations:
+      - method: GET
+        name: list-accounts
+        description: List clearing accounts.
+        call: stonex-clearing.list-accounts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/{accountId}/positions
+      name: positions
+      description: Account position data.
+      operations:
+      - method: GET
+        name: get-account-positions
+        description: Get current positions for a clearing account.
+        call: stonex-clearing.get-account-positions
+        with:
+          accountId: rest.accountId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/{accountId}/balances
+      name: balances
+      description: Account balance data.
+      operations:
+      - method: GET
+        name: get-account-balances
+        description: Get cash, margin, and P&L balances.
+        call: stonex-clearing.get-account-balances
+        with:
+          accountId: rest.accountId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/trades
+      name: trades
+      description: Trade submission and management.
+      operations:
+      - method: POST
+        name: submit-trade
+        description: Submit a trade for clearing and settlement.
+        call: stonex-clearing.submit-trade
+        with:
+          account_id: rest.account_id
+          symbol: rest.symbol
+          side: rest.side
+          quantity: rest.quantity
+          price: rest.price
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: list-trades
+        description: List trades with filters.
+        call: stonex-clearing.list-trades
+        with:
+          account_id: rest.account_id
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/documents
+      name: documents
+      description: Clearing documents.
+      operations:
+      - method: GET
+        name: list-documents
+        description: List clearing documents.
+        call: stonex-clearing.list-documents
+        with:
+          account_id: rest.account_id
+          document_type: rest.document_type
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: stonex-financial-mcp
+    transport: http
+    description: MCP server for AI-assisted financial operations including FX payment processing, account monitoring, position
+      management, and trade execution.
+    tools:
+    - name: payments-create-payment
+      description: Initiate a cross-border payment through StoneX in 140+ currencies. Use for corporate treasury FX payments,
+        international supplier payments, or global settlements.
+      hints:
+        readOnly: false
+      call: stonex-payments.create-payment
+      with:
+        amount: tools.amount
+        sell_currency: tools.sell_currency
+        buy_currency: tools.buy_currency
+        beneficiary_name: tools.beneficiary_name
+        account_number: tools.account_number
+        bank_code: tools.bank_code
+        payment_reference: tools.payment_reference
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: payments-list-payments
+      description: List cross-border payments with status and date filters. Use to monitor payment pipeline, reconcile transactions,
+        or generate reports.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: stonex-payments.list-payments
+      with:
+        status: tools.status
+        currency: tools.currency
+        from_date: tools.from_date
+        to_date: tools.to_date
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: payments-get-payment
+      description: Get details and current status of a specific payment.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: stonex-payments.get-payment
+      with:
+        paymentId: tools.paymentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: payments-get-fx-rates
+      description: Get indicative FX exchange rates for a currency pair. Use for pre-payment rate discovery or treasury rate
+        monitoring.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: stonex-payments.get-fx-rates
+      with:
+        sell_currency: tools.sell_currency
+        buy_currency: tools.buy_currency
+        amount: tools.amount
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: clearing-list-accounts
+      description: List institutional clearing accounts. Use to discover available accounts for trading or reporting.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: stonex-clearing.list-accounts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: clearing-get-positions
+      description: Get current open positions for a clearing account. Use for risk management, P&L monitoring, or portfolio
+        reporting.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: stonex-clearing.get-account-positions
+      with:
+        accountId: tools.accountId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: clearing-get-balances
+      description: Get cash, margin, and P&L balances for a clearing account. Use for margin monitoring, risk management,
+        or daily reconciliation.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: stonex-clearing.get-account-balances
+      with:
+        accountId: tools.accountId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: clearing-submit-trade
+      description: Submit a trade for clearing and settlement through StoneX. Use for programmatic trade entry or algorithmic
+        trading workflows.
+      hints:
+        readOnly: false
+      call: stonex-clearing.submit-trade
+      with:
+        account_id: tools.account_id
+        symbol: tools.symbol
+        side: tools.side
+        quantity: tools.quantity
+        price: tools.price
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: clearing-list-trades
+      description: List trades with account, status, and date filters. Use for trade reconciliation, settlement monitoring,
+        or reporting.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: stonex-clearing.list-trades
+      with:
+        account_id: tools.account_id
+        status: tools.status
+        from_date: tools.from_date
+        to_date: tools.to_date
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: clearing-list-documents
+      description: List clearing documents including trade confirmations and statements. Use for compliance, audit, or client
+        reporting.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: stonex-clearing.list-documents
+      with:
+        account_id: tools.account_id
+        document_type: tools.document_type
+      outputParameters:
+      - type: object
+        mapping: $.
