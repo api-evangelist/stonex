@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,153 +9,57 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: StoneX
 providerId: stonex
-publisherName: StoneX
-serviceCategory: API
+publisherName: StoneX Group Inc.
+serviceCategory: Financial Services
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
+  - FinOps
+  - FOCUS
   - Finance
-  - Financial Services
+  - Trading
   - Payments
   - Clearing
-  - Futures
-  - Trading
-  - Risk Management
-  - FinOps
-  - Cost Management
-  - FOCUS
-description: FinOps framework definition for the StoneX API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+description: StoneX bills under institutional agreements (commissions, spreads, FX margins, payments
+  fees, connectivity). This artifact captures publisher and category surface only; meters are placeholders
+  pending a published rate card.
+sources:
+  - https://www.stonex.com
+notes: 'Reconciliation marked false: StoneX does not publish a public billing/pricing schedule for programmatic
+  access. All commercial terms are private to the institutional agreement.'
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Contract-Negotiated Services
+  billingFrequency: Per-Trade or Monthly Statement
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
     - Tax
-    - Credit
     - Adjustment
-  chargeFrequency: Recurring
 focusColumns:
   ServiceName: StoneX
-  ServiceCategory: Developer Tools / API
+  ServiceCategory: Financial Services
   ProviderName: StoneX
-  PublisherName: StoneX
-  InvoiceIssuerName: StoneX
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PublisherName: StoneX Group Inc.
+  InvoiceIssuerName: StoneX Group Inc.
   BillingCurrency: USD
-  ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: contract_services
+    description: Negotiated commissions, spreads, FX margins, payments fees, and connectivity charges
+      on the institutional agreement
+    unit: varies
     aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
-    dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: StoneX Payments API
-    baseURL: ''
-    tags:
-      - Payments
-      - Cross-Border Payments
-      - FX
-      - REST
-    serviceName: StoneX Payments API
-    serviceCategory: API
-  - name: StoneX Clearing API
-    baseURL: ''
-    tags:
-      - Clearing
-      - Trading
-      - Accounts
-      - REST
-    serviceName: StoneX Clearing API
-    serviceCategory: API
-  - name: StoneX GF Futures API
-    baseURL: ''
-    tags:
-      - Futures
-      - Trading
-      - Market Data
-      - Institutional
-    serviceName: StoneX GF Futures API
-    serviceCategory: API
-  - name: StoneX Developer Portal
-    baseURL: ''
-    tags:
-      - Developer Portal
-      - API Management
-    serviceName: StoneX Developer Portal
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+principles:
+  - name: Visibility
+    description: Visibility into StoneX-related spend is via post-trade and statement files plus the
+      assigned relationship manager, not a usage API.
+  - name: Allocation
+    description: Allocation is by trading desk, account, or payments program per the institutional agreement.
+  - name: Optimization
+    description: Optimization levers are commercial (renegotiating commission tiers, consolidating venues,
+      managing FX exposure) and operational (batching payment instructions).
+  - name: Accountability
+    description: Account ownership rests with the institution's treasury, trading, or operations team.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
