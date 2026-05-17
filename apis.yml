@@ -38,7 +38,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.payments.stonex.io/
-      - type: Getting Started
+      - type: GettingStarted
         url: https://docs.payments.stonex.io/docs/quickstart-guide-1
       - type: OpenAPI
         url: >-
@@ -59,7 +59,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.clearing.stonex.com/docs
-      - type: Getting Started
+      - type: GettingStarted
         url: https://docs.clearing.stonex.com/docs/getting-started/introduction
       - type: OpenAPI
         url: >-
