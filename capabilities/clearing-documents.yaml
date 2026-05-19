@@ -1,0 +1,139 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: StoneX Clearing API — Documents
+  description: 'StoneX Clearing API — Documents. 2 operations. Lead operation: List Documents. Self-contained Naftiko capability
+    covering one Stonex business surface.'
+  tags:
+  - Stonex
+  - Documents
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STONEX_API_KEY: STONEX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: clearing-documents
+    baseUri: https://api.clearing.stonex.com
+    description: StoneX Clearing API — Documents business capability. Self-contained, no shared references.
+    resources:
+    - name: documents
+      path: /documents
+      operations:
+      - name: listdocuments
+        method: GET
+        description: List Documents
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: account_id
+          in: query
+          type: string
+          description: Filter by account ID.
+        - name: document_type
+          in: query
+          type: string
+          description: Filter by document type.
+        - name: from_date
+          in: query
+          type: string
+          description: Start date filter.
+        - name: to_date
+          in: query
+          type: string
+          description: End date filter.
+    - name: documents-documentId
+      path: /documents/{documentId}
+      operations:
+      - name: getdocument
+        method: GET
+        description: Get Document
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: documentId
+          in: path
+          type: string
+          description: Document identifier.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.STONEX_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: clearing-documents-rest
+    port: 8080
+    description: REST adapter for StoneX Clearing API — Documents. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/documents
+      name: documents
+      description: REST surface for documents.
+      operations:
+      - method: GET
+        name: listdocuments
+        description: List Documents
+        call: clearing-documents.listdocuments
+        with:
+          account_id: rest.account_id
+          document_type: rest.document_type
+          from_date: rest.from_date
+          to_date: rest.to_date
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/documents/{documentid}
+      name: documents-documentid
+      description: REST surface for documents-documentId.
+      operations:
+      - method: GET
+        name: getdocument
+        description: Get Document
+        call: clearing-documents.getdocument
+        with:
+          documentId: rest.documentId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: clearing-documents-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for StoneX Clearing API — Documents. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-documents
+      description: List Documents
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: clearing-documents.listdocuments
+      with:
+        account_id: tools.account_id
+        document_type: tools.document_type
+        from_date: tools.from_date
+        to_date: tools.to_date
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-document
+      description: Get Document
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: clearing-documents.getdocument
+      with:
+        documentId: tools.documentId
+      outputParameters:
+      - type: object
+        mapping: $.

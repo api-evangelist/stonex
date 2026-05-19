@@ -1,0 +1,211 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: StoneX Clearing API — Accounts
+  description: 'StoneX Clearing API — Accounts. 4 operations. Lead operation: List Accounts. Self-contained Naftiko capability
+    covering one Stonex business surface.'
+  tags:
+  - Stonex
+  - Accounts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STONEX_API_KEY: STONEX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: clearing-accounts
+    baseUri: https://api.clearing.stonex.com
+    description: StoneX Clearing API — Accounts business capability. Self-contained, no shared references.
+    resources:
+    - name: accounts
+      path: /accounts
+      operations:
+      - name: listaccounts
+        method: GET
+        description: List Accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Page number.
+        - name: page_size
+          in: query
+          type: integer
+          description: Results per page.
+    - name: accounts-accountId
+      path: /accounts/{accountId}
+      operations:
+      - name: getaccount
+        method: GET
+        description: Get Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: accountId
+          in: path
+          type: string
+          description: Unique account identifier.
+          required: true
+    - name: accounts-accountId-balances
+      path: /accounts/{accountId}/balances
+      operations:
+      - name: getaccountbalances
+        method: GET
+        description: Get Account Balances
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: accountId
+          in: path
+          type: string
+          description: Account identifier.
+          required: true
+    - name: accounts-accountId-positions
+      path: /accounts/{accountId}/positions
+      operations:
+      - name: getaccountpositions
+        method: GET
+        description: Get Account Positions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: accountId
+          in: path
+          type: string
+          description: Account identifier.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.STONEX_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: clearing-accounts-rest
+    port: 8080
+    description: REST adapter for StoneX Clearing API — Accounts. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/accounts
+      name: accounts
+      description: REST surface for accounts.
+      operations:
+      - method: GET
+        name: listaccounts
+        description: List Accounts
+        call: clearing-accounts.listaccounts
+        with:
+          page: rest.page
+          page_size: rest.page_size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/{accountid}
+      name: accounts-accountid
+      description: REST surface for accounts-accountId.
+      operations:
+      - method: GET
+        name: getaccount
+        description: Get Account
+        call: clearing-accounts.getaccount
+        with:
+          accountId: rest.accountId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/{accountid}/balances
+      name: accounts-accountid-balances
+      description: REST surface for accounts-accountId-balances.
+      operations:
+      - method: GET
+        name: getaccountbalances
+        description: Get Account Balances
+        call: clearing-accounts.getaccountbalances
+        with:
+          accountId: rest.accountId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/{accountid}/positions
+      name: accounts-accountid-positions
+      description: REST surface for accounts-accountId-positions.
+      operations:
+      - method: GET
+        name: getaccountpositions
+        description: Get Account Positions
+        call: clearing-accounts.getaccountpositions
+        with:
+          accountId: rest.accountId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: clearing-accounts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for StoneX Clearing API — Accounts. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-accounts
+      description: List Accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: clearing-accounts.listaccounts
+      with:
+        page: tools.page
+        page_size: tools.page_size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-account
+      description: Get Account
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: clearing-accounts.getaccount
+      with:
+        accountId: tools.accountId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-account-balances
+      description: Get Account Balances
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: clearing-accounts.getaccountbalances
+      with:
+        accountId: tools.accountId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-account-positions
+      description: Get Account Positions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: clearing-accounts.getaccountpositions
+      with:
+        accountId: tools.accountId
+      outputParameters:
+      - type: object
+        mapping: $.
