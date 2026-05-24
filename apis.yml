@@ -106,6 +106,8 @@ common:
     url: https://developer.stonex.com/
   - type: Documentation
     url: https://developer.stonex.com/documentation
+  - type: LLMsTxt
+    url: https://developer.stonex.com/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
