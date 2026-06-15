@@ -1,0 +1,169 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "StoneX Payments API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Authentication Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://fx-api.payments.stonex.com/auth/token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exchange client credentials for a JWT access token. The generated access_token has a lifetime of 10 hours and must be passed as a Bearer token in the Authorization header for all subsequent requests."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://fx-api.payments.stonex.com/payments",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter payments by status."
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Filter by payment currency (ISO 4217)."
+              },
+              {
+                "name": "from_date",
+                "value": "",
+                "type": "query",
+                "description": "Start of date range filter (ISO 8601)."
+              },
+              {
+                "name": "to_date",
+                "value": "",
+                "type": "query",
+                "description": "End of date range filter (ISO 8601)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of payments with optional filtering."
+        },
+        {
+          "info": {
+            "name": "Create Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://fx-api.payments.stonex.com/payments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate a cross-border payment in local currency. Supports 140+ currencies and local settlement options globally."
+        },
+        {
+          "info": {
+            "name": "Get Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://fx-api.payments.stonex.com/payments/:paymentId",
+            "params": [
+              {
+                "name": "paymentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique payment identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific payment by ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "FX Rates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get FX Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://fx-api.payments.stonex.com/rates",
+            "params": [
+              {
+                "name": "sell_currency",
+                "value": "",
+                "type": "query",
+                "description": "Source currency (ISO 4217 code)."
+              },
+              {
+                "name": "buy_currency",
+                "value": "",
+                "type": "query",
+                "description": "Target currency (ISO 4217 code)."
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Amount to convert."
+              }
+            ]
+          },
+          "docs": "Get indicative foreign exchange rates for supported currency pairs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

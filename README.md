@@ -1,13 +1,12 @@
-# StoneX
+# StoneX (stonex)
 
 StoneX Group is a global financial services organization that provides execution, risk management, market intelligence, and post-trade services across asset classes and markets to institutional, commercial, and retail clients. StoneX offers REST APIs for payments, clearing, and futures trading with OAuth 2.0 authentication.
 
-**URL:** [https://raw.githubusercontent.com/api-evangelist/stonex/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/stonex/refs/heads/main/apis.yml)
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/stonex/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/stonex/refs/heads/main/apis.yml)
 
 ## Scope
 
 - **Type:** Index
-- **Fortune 500:** Yes
 
 ## Tags
 
@@ -22,105 +21,107 @@ StoneX Group is a global financial services organization that provides execution
 ## Timestamps
 
 - **Created:** 2026-05-02
-- **Modified:** 2026-05-02
+- **Modified:** 2026-05-19
 
 ## APIs
 
 ### StoneX Payments API
 
-Cross-border payment processing in 140+ currencies with local currency acceptance and global settlement.
+The StoneX Payments REST API enables cross-border payment processing in 140+ currencies with local currency acceptance and settlement. Uses Bearer token authentication over HTTPS with TLS 1.3. Available in sandbox and production environments.
 
-**Human URL:** [https://docs.payments.stonex.io/](https://docs.payments.stonex.io/)
+- **Human URL:** [https://docs.payments.stonex.io/](https://docs.payments.stonex.io/)
+
+#### Tags
+
+- Payments
+- Cross-Border Payments
+- FX
+- REST
+
+#### Properties
+
+- [Documentation](https://docs.payments.stonex.io/)
+- [Getting Started](https://docs.payments.stonex.io/docs/quickstart-guide-1)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/stonex/refs/heads/main/openapi/stonex-payments-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/stonex-clearing.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/stonex-clearing.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/stonex-payments.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/stonex-payments.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### StoneX Clearing API
 
-Institutional clearing accounts, trade submission, position tracking, and document management.
+The StoneX Clearing REST API provides programmatic access to accounts, trading, and document management for clearing clients. Supports OAuth 2.0 authentication with JWT tokens. Available in UAT (api.clearing.uat.stonex.com) and production (api.clearing.stonex.com).
 
-**Human URL:** [https://docs.clearing.stonex.com/](https://docs.clearing.stonex.com/)
+- **Human URL:** [https://docs.clearing.stonex.com/](https://docs.clearing.stonex.com/)
+
+#### Tags
+
+- Clearing
+- Trading
+- Accounts
+- REST
+
+#### Properties
+
+- [Documentation](https://docs.clearing.stonex.com/docs)
+- [Getting Started](https://docs.clearing.stonex.com/docs/getting-started/introduction)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/stonex/refs/heads/main/openapi/stonex-clearing-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/stonex-clearing.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/stonex-clearing.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/stonex-payments.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/stonex-payments.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### StoneX GF Futures API
 
-Institutional-grade futures trading with market data, order management, and account tracking.
+The StoneX GF (GAIN Futures) API provides institutional-grade access to futures trading including market data, order management, account and position tracking, margin calculations, contract lookup, and real-time price feeds for futures contracts.
 
-**Human URL:** [https://futures-media.stonex.com/gfapi/index.html](https://futures-media.stonex.com/gfapi/index.html)
+- **Human URL:** [https://futures-media.stonex.com/gfapi/index.html](https://futures-media.stonex.com/gfapi/index.html)
+
+#### Tags
+
+- Futures
+- Trading
+- Market Data
+- Institutional
+
+#### Properties
+
+- [Documentation](https://futures-media.stonex.com/gfapi/index.html)
+- [Postman Collection](collections/stonex-clearing.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/stonex-clearing.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/stonex-payments.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/stonex-payments.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### StoneX Developer Portal
 
-Full API product catalog with subscription keys and documentation.
+The StoneX Developer Storefront provides access to all StoneX API products with subscription keys, documentation, and developer resources for integrating with StoneX financial services.
 
-**Human URL:** [https://developer.stonex.com/](https://developer.stonex.com/)
+- **Human URL:** [https://developer.stonex.com/](https://developer.stonex.com/)
 
-## OpenAPI Specifications
+#### Tags
 
-| Spec | Operations | Description |
-|---|---|---|
-| [stonex-payments-openapi.yml](openapi/stonex-payments-openapi.yml) | 5 | StoneX Payments REST API — payments and FX rates |
-| [stonex-clearing-openapi.yml](openapi/stonex-clearing-openapi.yml) | 9 | StoneX Clearing REST API — accounts, trades, and documents |
+- Developer Portal
+- API Management
 
-## Capabilities
+#### Properties
 
-### Workflow Capabilities
-
-| Capability | Tools | Description |
-|---|---|---|
-| [financial-services.yaml](capabilities/financial-services.yaml) | 10 | Unified financial services — payments, FX, clearing, trading |
-
-### Shared Definitions
-
-| Definition | Resources | Description |
-|---|---|---|
-| [shared/stonex-payments.yaml](capabilities/shared/stonex-payments.yaml) | 4 | StoneX Payments API consumed definition |
-| [shared/stonex-clearing.yaml](capabilities/shared/stonex-clearing.yaml) | 6 | StoneX Clearing API consumed definition |
-
-## Rules
-
-| Ruleset | Description |
-|---|---|
-| [stonex-rules.yml](rules/stonex-rules.yml) | Spectral ruleset enforcing StoneX API conventions |
-
-## JSON Schema
-
-| Schema | Description |
-|---|---|
-| [stonex-payment-schema.json](json-schema/stonex-payment-schema.json) | Cross-border payment schema |
-| [stonex-clearing-account-schema.json](json-schema/stonex-clearing-account-schema.json) | Institutional clearing account schema |
-
-## JSON Structure
-
-| Structure | Description |
-|---|---|
-| [stonex-payment-structure.json](json-structure/stonex-payment-structure.json) | Payment response document structure |
-
-## JSON-LD
-
-| Context | Description |
-|---|---|
-| [stonex-context.jsonld](json-ld/stonex-context.jsonld) | JSON-LD context mapping StoneX vocabulary to schema.org and FIBO |
-
-## Examples
-
-| Example | Description |
-|---|---|
-| [stonex-create-payment-example.json](examples/stonex-create-payment-example.json) | Create a USD to EUR cross-border payment |
-
-## Vocabulary
-
-| Vocabulary | Description |
-|---|---|
-| [stonex-vocabulary.yml](vocabulary/stonex-vocabulary.yml) | Domain vocabulary for FX payments, clearing, and institutional trading |
-
-## GitHub Organizations
-
-- [github.com/StoneXLabs](https://github.com/StoneXLabs) — C++ AMQP client libraries, data engineering tools
+- [Documentation](https://developer.stonex.com/documentation)
+- [Products](https://developer.stonex.com/products)
+- [Postman Collection](collections/stonex-clearing.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/stonex-clearing.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/stonex-payments.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/stonex-payments.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ## Common Properties
 
+- [GitHub Organization](https://github.com/stonex)
+- [LinkedIn](https://www.linkedin.com/company/stonex-group)
 - [Website](https://www.stonex.com)
-- [Developer Portal](https://developer.stonex.com/)
+- [Developer  Portal](https://developer.stonex.com/)
 - [Documentation](https://developer.stonex.com/documentation)
+- [L L Ms Txt](https://developer.stonex.com/llms.txt)
 
 ## Maintainers
 
 **FN:** Kin Lane
-
 **Email:** kin@apievangelist.com
