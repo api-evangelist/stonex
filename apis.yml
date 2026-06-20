@@ -5,7 +5,7 @@ description: >-
   intelligence, and post-trade services across asset classes and markets to institutional, commercial, and retail
   clients. StoneX offers REST APIs for payments, clearing, and futures trading with OAuth 2.0 authentication.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Finance
   - Financial Services
