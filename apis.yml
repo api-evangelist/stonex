@@ -93,11 +93,11 @@ common:
     url: https://www.linkedin.com/company/stonex-group
   - type: Website
     url: https://www.stonex.com
-  - type: Developer Portal
+  - type: DeveloperPortal
     url: https://developer.stonex.com/
   - type: Documentation
     url: https://developer.stonex.com/documentation
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://developer.stonex.com/llms.txt
 maintainers:
   - FN: Kin Lane
