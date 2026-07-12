@@ -87,6 +87,12 @@ apis:
       - type: Products
         url: https://developer.stonex.com/products
 common:
+  - type: VulnerabilityDisclosure
+    url: security/stonex-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/stonex-domain-security.yml
+  - type: Authentication
+    url: authentication/stonex-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/stonex
   - type: LinkedIn

@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/stonex-clearing-openapi.yml, openapi/stonex-payments-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  description: JWT token from /auth/token endpoint. Valid for 10 hours.
+  sources:
+  - openapi/stonex-clearing-openapi.yml
+  - openapi/stonex-payments-openapi.yml
