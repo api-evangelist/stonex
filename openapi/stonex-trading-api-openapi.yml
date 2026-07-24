@@ -1,0 +1,203 @@
+openapi: 3.0.3
+info:
+  title: StoneX Clearing Accounts Trading API
+  description: The StoneX Clearing REST API provides programmatic access to accounts, trading, and document management for institutional clearing clients. Uses OAuth 2.0 authentication with JWT tokens (10-hour lifetime). Available in UAT and production environments.
+  version: '1.0'
+  contact:
+    url: https://docs.clearing.stonex.com/
+servers:
+- url: https://api.clearing.stonex.com
+  description: StoneX Clearing Production
+- url: https://api.clearing.uat.stonex.com
+  description: StoneX Clearing UAT (Test)
+security:
+- BearerAuth: []
+tags:
+- name: Trading
+  description: Trade submission and management.
+paths:
+  /trades:
+    post:
+      operationId: submitTrade
+      summary: Submit Trade
+      description: Submit a trade for clearing and settlement.
+      tags:
+      - Trading
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TradeRequest'
+      responses:
+        '201':
+          description: Trade submitted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trade'
+        '400':
+          description: Invalid trade request.
+        '401':
+          description: Unauthorized.
+    get:
+      operationId: listTrades
+      summary: List Trades
+      description: Retrieve a list of trades with optional filtering.
+      tags:
+      - Trading
+      parameters:
+      - name: account_id
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by account ID.
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - pending
+          - confirmed
+          - settled
+          - cancelled
+        description: Filter by trade status.
+      - name: from_date
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+        description: Start date filter.
+      - name: to_date
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+        description: End date filter.
+      responses:
+        '200':
+          description: Trades list returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradeList'
+        '401':
+          description: Unauthorized.
+  /trades/{tradeId}:
+    get:
+      operationId: getTrade
+      summary: Get Trade
+      description: Retrieve details of a specific trade.
+      tags:
+      - Trading
+      parameters:
+      - name: tradeId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Trade identifier.
+      responses:
+        '200':
+          description: Trade details returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trade'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Trade not found.
+components:
+  schemas:
+    TradeRequest:
+      type: object
+      required:
+      - account_id
+      - symbol
+      - side
+      - quantity
+      properties:
+        account_id:
+          type: string
+          description: Account to book the trade against.
+        symbol:
+          type: string
+          description: Instrument symbol.
+        side:
+          type: string
+          enum:
+          - buy
+          - sell
+          description: Trade direction.
+        quantity:
+          type: number
+          description: Trade quantity.
+        price:
+          type: number
+          description: Trade price (required for limit orders).
+        trade_date:
+          type: string
+          format: date
+          description: Trade date.
+        settlement_date:
+          type: string
+          format: date
+          description: Settlement date.
+    TradeList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Trade'
+        total:
+          type: integer
+        page:
+          type: integer
+    Trade:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique trade identifier.
+        account_id:
+          type: string
+          description: Account identifier.
+        symbol:
+          type: string
+          description: Instrument symbol.
+        side:
+          type: string
+          enum:
+          - buy
+          - sell
+        quantity:
+          type: number
+        price:
+          type: number
+        status:
+          type: string
+          enum:
+          - pending
+          - confirmed
+          - settled
+          - cancelled
+        trade_date:
+          type: string
+          format: date
+        settlement_date:
+          type: string
+          format: date
+        created_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: JWT token from /auth/token endpoint. Valid for 10 hours.

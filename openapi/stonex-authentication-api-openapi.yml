@@ -1,0 +1,74 @@
+openapi: 3.0.3
+info:
+  title: StoneX Clearing Accounts Authentication API
+  description: The StoneX Clearing REST API provides programmatic access to accounts, trading, and document management for institutional clearing clients. Uses OAuth 2.0 authentication with JWT tokens (10-hour lifetime). Available in UAT and production environments.
+  version: '1.0'
+  contact:
+    url: https://docs.clearing.stonex.com/
+servers:
+- url: https://api.clearing.stonex.com
+  description: StoneX Clearing Production
+- url: https://api.clearing.uat.stonex.com
+  description: StoneX Clearing UAT (Test)
+security:
+- BearerAuth: []
+tags:
+- name: Authentication
+  description: OAuth 2.0 token management.
+paths:
+  /auth/token:
+    post:
+      operationId: getAuthToken
+      summary: Get Authentication Token
+      description: Obtain a JWT access token using OAuth 2.0 client credentials. The token is valid for 10 hours and must be passed as a Bearer token in the Authorization header.
+      tags:
+      - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - client_id
+              - client_secret
+              properties:
+                client_id:
+                  type: string
+                  description: OAuth 2.0 client ID.
+                client_secret:
+                  type: string
+                  description: OAuth 2.0 client secret.
+                grant_type:
+                  type: string
+                  enum:
+                  - client_credentials
+                  default: client_credentials
+      responses:
+        '200':
+          description: JWT access token returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          description: Invalid credentials.
+components:
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: JWT Bearer access token.
+        token_type:
+          type: string
+          description: Token type (Bearer).
+        expires_in:
+          type: integer
+          description: Token expiry in seconds (36000 = 10 hours).
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: JWT token from /auth/token endpoint. Valid for 10 hours.

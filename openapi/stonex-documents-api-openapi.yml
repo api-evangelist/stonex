@@ -1,0 +1,122 @@
+openapi: 3.0.3
+info:
+  title: StoneX Clearing Accounts Documents API
+  description: The StoneX Clearing REST API provides programmatic access to accounts, trading, and document management for institutional clearing clients. Uses OAuth 2.0 authentication with JWT tokens (10-hour lifetime). Available in UAT and production environments.
+  version: '1.0'
+  contact:
+    url: https://docs.clearing.stonex.com/
+servers:
+- url: https://api.clearing.stonex.com
+  description: StoneX Clearing Production
+- url: https://api.clearing.uat.stonex.com
+  description: StoneX Clearing UAT (Test)
+security:
+- BearerAuth: []
+tags:
+- name: Documents
+  description: Document retrieval and management.
+paths:
+  /documents:
+    get:
+      operationId: listDocuments
+      summary: List Documents
+      description: Retrieve a list of clearing documents.
+      tags:
+      - Documents
+      parameters:
+      - name: account_id
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by account ID.
+      - name: document_type
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by document type.
+      - name: from_date
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+        description: Start date filter.
+      - name: to_date
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+        description: End date filter.
+      responses:
+        '200':
+          description: Documents list returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentList'
+        '401':
+          description: Unauthorized.
+  /documents/{documentId}:
+    get:
+      operationId: getDocument
+      summary: Get Document
+      description: Retrieve a specific clearing document.
+      tags:
+      - Documents
+      parameters:
+      - name: documentId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Document identifier.
+      responses:
+        '200':
+          description: Document returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Document not found.
+components:
+  schemas:
+    Document:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Document identifier.
+        account_id:
+          type: string
+          description: Associated account.
+        document_type:
+          type: string
+          description: Type of document (e.g., statement, confirmation).
+        date:
+          type: string
+          format: date
+          description: Document date.
+        url:
+          type: string
+          format: uri
+          description: Download URL for the document.
+    DocumentList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+        total:
+          type: integer
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: JWT token from /auth/token endpoint. Valid for 10 hours.

@@ -1,0 +1,244 @@
+openapi: 3.0.3
+info:
+  title: StoneX Clearing Accounts Payments API
+  description: The StoneX Clearing REST API provides programmatic access to accounts, trading, and document management for institutional clearing clients. Uses OAuth 2.0 authentication with JWT tokens (10-hour lifetime). Available in UAT and production environments.
+  version: '1.0'
+  contact:
+    url: https://docs.clearing.stonex.com/
+servers:
+- url: https://api.clearing.stonex.com
+  description: StoneX Clearing Production
+- url: https://api.clearing.uat.stonex.com
+  description: StoneX Clearing UAT (Test)
+security:
+- BearerAuth: []
+tags:
+- name: Payments
+  description: Payment execution and management.
+paths:
+  /payments:
+    post:
+      operationId: createPayment
+      summary: Create Payment
+      description: Initiate a cross-border payment in local currency. Supports 140+ currencies and local settlement options globally.
+      tags:
+      - Payments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePaymentRequest'
+      responses:
+        '201':
+          description: Payment created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          description: Invalid payment request.
+        '401':
+          description: Unauthorized.
+        '429':
+          description: Rate limit exceeded.
+    get:
+      operationId: listPayments
+      summary: List Payments
+      description: Retrieve a list of payments with optional filtering.
+      tags:
+      - Payments
+      parameters:
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - pending
+          - processing
+          - completed
+          - failed
+          - cancelled
+        description: Filter payments by status.
+      - name: currency
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by payment currency (ISO 4217).
+      - name: from_date
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Start of date range filter (ISO 8601).
+      - name: to_date
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: End of date range filter (ISO 8601).
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Page number for pagination.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Number of results per page.
+      responses:
+        '200':
+          description: Payments list returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentList'
+        '401':
+          description: Unauthorized.
+  /payments/{paymentId}:
+    get:
+      operationId: getPayment
+      summary: Get Payment
+      description: Retrieve details of a specific payment by ID.
+      tags:
+      - Payments
+      parameters:
+      - name: paymentId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique payment identifier.
+      responses:
+        '200':
+          description: Payment details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Payment not found.
+components:
+  schemas:
+    Payment:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique payment identifier.
+        status:
+          type: string
+          enum:
+          - pending
+          - processing
+          - completed
+          - failed
+          - cancelled
+          description: Payment status.
+        amount:
+          type: number
+          description: Payment amount.
+        sell_currency:
+          type: string
+          description: Source currency (ISO 4217).
+        buy_currency:
+          type: string
+          description: Destination currency (ISO 4217).
+        exchange_rate:
+          type: number
+          description: Applied exchange rate.
+        buy_amount:
+          type: number
+          description: Amount received in the destination currency.
+        payment_reference:
+          type: string
+          description: Payment reference.
+        created_at:
+          type: string
+          format: date-time
+          description: Payment creation timestamp.
+        value_date:
+          type: string
+          format: date
+          description: Settlement value date.
+        beneficiary:
+          $ref: '#/components/schemas/Beneficiary'
+    Beneficiary:
+      type: object
+      required:
+      - name
+      - country
+      - account_number
+      - bank_code
+      properties:
+        name:
+          type: string
+          description: Beneficiary name.
+        country:
+          type: string
+          description: Beneficiary country (ISO 3166-1 alpha-2).
+        account_number:
+          type: string
+          description: Beneficiary bank account number or IBAN.
+        bank_code:
+          type: string
+          description: Bank routing code (BIC/SWIFT, ABA, sort code, etc.).
+        address:
+          type: string
+          description: Beneficiary address.
+    CreatePaymentRequest:
+      type: object
+      required:
+      - amount
+      - sell_currency
+      - buy_currency
+      - beneficiary
+      properties:
+        amount:
+          type: number
+          description: Payment amount.
+        sell_currency:
+          type: string
+          description: Source currency code (ISO 4217).
+        buy_currency:
+          type: string
+          description: Destination currency code (ISO 4217).
+        beneficiary:
+          $ref: '#/components/schemas/Beneficiary'
+        payment_reference:
+          type: string
+          description: Reference for the payment.
+        value_date:
+          type: string
+          format: date
+          description: Desired value date for the payment.
+    PaymentList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment'
+        total:
+          type: integer
+          description: Total number of payments matching the filter.
+        page:
+          type: integer
+          description: Current page number.
+        page_size:
+          type: integer
+          description: Number of results per page.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: JWT token from /auth/token endpoint. Valid for 10 hours.

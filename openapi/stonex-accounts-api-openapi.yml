@@ -1,0 +1,232 @@
+openapi: 3.0.3
+info:
+  title: StoneX Clearing Accounts API
+  description: The StoneX Clearing REST API provides programmatic access to accounts, trading, and document management for institutional clearing clients. Uses OAuth 2.0 authentication with JWT tokens (10-hour lifetime). Available in UAT and production environments.
+  version: '1.0'
+  contact:
+    url: https://docs.clearing.stonex.com/
+servers:
+- url: https://api.clearing.stonex.com
+  description: StoneX Clearing Production
+- url: https://api.clearing.uat.stonex.com
+  description: StoneX Clearing UAT (Test)
+security:
+- BearerAuth: []
+tags:
+- name: Accounts
+  description: Account information and management.
+paths:
+  /accounts:
+    get:
+      operationId: listAccounts
+      summary: List Accounts
+      description: Retrieve a list of clearing accounts accessible to the authenticated client.
+      tags:
+      - Accounts
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Page number.
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Results per page.
+      responses:
+        '200':
+          description: Accounts list returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountList'
+        '401':
+          description: Unauthorized.
+  /accounts/{accountId}:
+    get:
+      operationId: getAccount
+      summary: Get Account
+      description: Retrieve details of a specific clearing account.
+      tags:
+      - Accounts
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique account identifier.
+      responses:
+        '200':
+          description: Account details returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Account not found.
+  /accounts/{accountId}/positions:
+    get:
+      operationId: getAccountPositions
+      summary: Get Account Positions
+      description: Retrieve current positions for a clearing account.
+      tags:
+      - Accounts
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Account identifier.
+      responses:
+        '200':
+          description: Account positions returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PositionList'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Account not found.
+  /accounts/{accountId}/balances:
+    get:
+      operationId: getAccountBalances
+      summary: Get Account Balances
+      description: Retrieve cash, margin, and P&L balances for a clearing account.
+      tags:
+      - Accounts
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Account identifier.
+      responses:
+        '200':
+          description: Account balances returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Balance'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Account not found.
+components:
+  schemas:
+    PositionList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Position'
+        account_id:
+          type: string
+        as_of:
+          type: string
+          format: date-time
+    Position:
+      type: object
+      properties:
+        account_id:
+          type: string
+          description: Account identifier.
+        symbol:
+          type: string
+          description: Instrument symbol.
+        quantity:
+          type: number
+          description: Position size (positive = long, negative = short).
+        average_price:
+          type: number
+          description: Average cost basis.
+        market_price:
+          type: number
+          description: Current market price.
+        market_value:
+          type: number
+          description: Current market value.
+        unrealized_pnl:
+          type: number
+          description: Unrealized profit and loss.
+    AccountList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        total:
+          type: integer
+        page:
+          type: integer
+        page_size:
+          type: integer
+    Balance:
+      type: object
+      properties:
+        account_id:
+          type: string
+          description: Account identifier.
+        cash_balance:
+          type: number
+          description: Cash balance.
+        margin_used:
+          type: number
+          description: Margin currently in use.
+        margin_available:
+          type: number
+          description: Available margin.
+        unrealized_pnl:
+          type: number
+          description: Unrealized profit and loss.
+        realized_pnl:
+          type: number
+          description: Realized profit and loss.
+        currency:
+          type: string
+          description: Balance currency (ISO 4217).
+        as_of:
+          type: string
+          format: date-time
+          description: Balance timestamp.
+    Account:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique account identifier.
+        name:
+          type: string
+          description: Account name.
+        account_type:
+          type: string
+          description: Account type classification.
+        status:
+          type: string
+          enum:
+          - active
+          - inactive
+          - suspended
+          description: Account status.
+        currency:
+          type: string
+          description: Base currency (ISO 4217).
+        created_at:
+          type: string
+          format: date-time
+          description: Account creation timestamp.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: JWT token from /auth/token endpoint. Valid for 10 hours.
