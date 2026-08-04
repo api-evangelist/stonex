@@ -1,0 +1,24 @@
+{
+  "provider": "stonex",
+  "sources": [
+    "stonex-accounts-api-openapi.yml",
+    "stonex-authentication-api-openapi.yml",
+    "stonex-documents-api-openapi.yml",
+    "stonex-fx-rates-api-openapi.yml",
+    "stonex-payments-api-openapi.yml",
+    "stonex-trading-api-openapi.yml"
+  ],
+  "outputs": [
+    "stonex-accounts-api-openapi.yml",
+    "stonex-authentication-api-openapi.yml",
+    "stonex-documents-api-openapi.yml",
+    "stonex-fx-rates-api-openapi.yml",
+    "stonex-payments-api-openapi.yml",
+    "stonex-trading-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
