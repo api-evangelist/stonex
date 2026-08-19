@@ -1,0 +1,409 @@
+{
+  "item": [
+    {
+      "id": "e01e4b5a-f260-4f6c-b077-3cec1ac84df2",
+      "name": "Documents",
+      "description": {
+        "content": "Document retrieval and management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ce0c5825-b16c-4536-8db8-2015c5298792",
+          "name": "List Documents",
+          "request": {
+            "name": "List Documents",
+            "description": {
+              "content": "Retrieve a list of clearing documents.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>",
+                  "description": "Filter by account ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "document_type",
+                  "value": "<string>",
+                  "description": "Filter by document type."
+                },
+                {
+                  "disabled": false,
+                  "key": "from_date",
+                  "value": "<date>",
+                  "description": "Start date filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "to_date",
+                  "value": "<date>",
+                  "description": "End date filter."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f0623b9f-0d6c-4249-880d-ec6e7b7e99d8",
+              "name": "Documents list returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "document_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"account_id\": \"string\",\n      \"document_type\": \"string\",\n      \"date\": \"2025-08-05\",\n      \"url\": \"http://CRucdADeWhcaLZyhpiW.wlwjklUvgFddaRmqagJZ.,VTfslY\"\n    },\n    {\n      \"id\": \"string\",\n      \"account_id\": \"string\",\n      \"document_type\": \"string\",\n      \"date\": \"1973-12-11\",\n      \"url\": \"http://XKNLAOTljMlALzfWxWuvfnbdXD.msmmL,qfnn7Zukx1eRQnS3uyG-4eu.d9.SuCR0AuINqAajVS+iMpe1-WDDRQr5dI\"\n    }\n  ],\n  \"total\": 2212\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68838fd7-b1a1-4244-bb12-67bd582299c7",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "document_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "51ce4c9f-e5d2-4525-b9c4-254ae47d19b7",
+          "name": "Get Document",
+          "request": {
+            "name": "Get Document",
+            "description": {
+              "content": "Retrieve a specific clearing document.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents",
+                ":documentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "documentId",
+                  "description": "(Required) Document identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2f358fc9-db82-412e-9caa-92053e19becd",
+              "name": "Document returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    ":documentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) Document identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"account_id\": \"string\",\n  \"document_type\": \"string\",\n  \"date\": \"1981-07-10\",\n  \"url\": \"https://NTXCbyRkwkRJcmE.hmtMZ5Ku1tGqA\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acf2c96a-fc0d-4a42-9009-b32f07d03898",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    ":documentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) Document identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "19f61a7a-e3d5-4610-a861-2add58fbb4fd",
+              "name": "Document not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    ":documentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) Document identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.clearing.stonex.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dbccea0b-760a-497c-bcfd-bdd12ee06b3a",
+    "name": "StoneX Clearing Accounts Documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The StoneX Clearing REST API provides programmatic access to accounts, trading, and document management for institutional clearing clients. Uses OAuth 2.0 authentication with JWT tokens (10-hour lifetime). Available in UAT and production environments.",
+      "type": "text/plain"
+    }
+  }
+}

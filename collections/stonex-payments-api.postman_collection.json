@@ -1,0 +1,677 @@
+{
+  "item": [
+    {
+      "id": "35343ad6-86cd-46ab-8b7d-0118439c904a",
+      "name": "Payments",
+      "description": {
+        "content": "Payment execution and management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5dbabbfe-61bd-4179-841d-8e07e7006017",
+          "name": "Create Payment",
+          "request": {
+            "name": "Create Payment",
+            "description": {
+              "content": "Initiate a cross-border payment in local currency. Supports 140+ currencies and local settlement options globally.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<number>\",\n  \"sell_currency\": \"<string>\",\n  \"buy_currency\": \"<string>\",\n  \"beneficiary\": {\n    \"name\": \"<string>\",\n    \"country\": \"<string>\",\n    \"account_number\": \"<string>\",\n    \"bank_code\": \"<string>\",\n    \"address\": \"<string>\"\n  },\n  \"payment_reference\": \"<string>\",\n  \"value_date\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "de4647ae-d4d6-4576-8378-907c3987e9fb",
+              "name": "Payment created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number>\",\n  \"sell_currency\": \"<string>\",\n  \"buy_currency\": \"<string>\",\n  \"beneficiary\": {\n    \"name\": \"<string>\",\n    \"country\": \"<string>\",\n    \"account_number\": \"<string>\",\n    \"bank_code\": \"<string>\",\n    \"address\": \"<string>\"\n  },\n  \"payment_reference\": \"<string>\",\n  \"value_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"completed\",\n  \"amount\": 6255.725645516215,\n  \"sell_currency\": \"string\",\n  \"buy_currency\": \"string\",\n  \"exchange_rate\": 3731.8704402799117,\n  \"buy_amount\": 9470.489760564022,\n  \"payment_reference\": \"string\",\n  \"created_at\": \"1972-11-23T16:12:43.747Z\",\n  \"value_date\": \"2010-08-13\",\n  \"beneficiary\": {\n    \"name\": \"<string>\",\n    \"country\": \"<string>\",\n    \"account_number\": \"<string>\",\n    \"bank_code\": \"<string>\",\n    \"address\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc500883-2784-4c2c-8cab-c6cbcad790a5",
+              "name": "Invalid payment request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number>\",\n  \"sell_currency\": \"<string>\",\n  \"buy_currency\": \"<string>\",\n  \"beneficiary\": {\n    \"name\": \"<string>\",\n    \"country\": \"<string>\",\n    \"account_number\": \"<string>\",\n    \"bank_code\": \"<string>\",\n    \"address\": \"<string>\"\n  },\n  \"payment_reference\": \"<string>\",\n  \"value_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2fbfab04-a414-4c26-bdb5-2ebb6f029264",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number>\",\n  \"sell_currency\": \"<string>\",\n  \"buy_currency\": \"<string>\",\n  \"beneficiary\": {\n    \"name\": \"<string>\",\n    \"country\": \"<string>\",\n    \"account_number\": \"<string>\",\n    \"bank_code\": \"<string>\",\n    \"address\": \"<string>\"\n  },\n  \"payment_reference\": \"<string>\",\n  \"value_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ceb48e93-1862-435d-a381-8df74f080ba9",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number>\",\n  \"sell_currency\": \"<string>\",\n  \"buy_currency\": \"<string>\",\n  \"beneficiary\": {\n    \"name\": \"<string>\",\n    \"country\": \"<string>\",\n    \"account_number\": \"<string>\",\n    \"bank_code\": \"<string>\",\n    \"address\": \"<string>\"\n  },\n  \"payment_reference\": \"<string>\",\n  \"value_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10a3e2f3-2f44-4a8a-a068-86cbaa913319",
+          "name": "List Payments",
+          "request": {
+            "name": "List Payments",
+            "description": {
+              "content": "Retrieve a list of payments with optional filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter payments by status."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "Filter by payment currency (ISO 4217)."
+                },
+                {
+                  "disabled": false,
+                  "key": "from_date",
+                  "value": "<dateTime>",
+                  "description": "Start of date range filter (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "to_date",
+                  "value": "<dateTime>",
+                  "description": "End of date range filter (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f4f1df63-2199-4dcb-9900-cb2eaf0610b7",
+              "name": "Payments list returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"completed\",\n      \"amount\": 1070.5091644146048,\n      \"sell_currency\": \"string\",\n      \"buy_currency\": \"string\",\n      \"exchange_rate\": 3631.5590114320485,\n      \"buy_amount\": 9966.439294370266,\n      \"payment_reference\": \"string\",\n      \"created_at\": \"2004-05-31T05:56:53.438Z\",\n      \"value_date\": \"1948-12-16\",\n      \"beneficiary\": {\n        \"name\": \"<string>\",\n        \"country\": \"<string>\",\n        \"account_number\": \"<string>\",\n        \"bank_code\": \"<string>\",\n        \"address\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"cancelled\",\n      \"amount\": 4031.486077876988,\n      \"sell_currency\": \"string\",\n      \"buy_currency\": \"string\",\n      \"exchange_rate\": 8794.45663627158,\n      \"buy_amount\": 4311.385463954718,\n      \"payment_reference\": \"string\",\n      \"created_at\": \"1980-07-09T02:04:14.811Z\",\n      \"value_date\": \"1969-01-07\",\n      \"beneficiary\": {\n        \"name\": \"<string>\",\n        \"country\": \"<string>\",\n        \"account_number\": \"<string>\",\n        \"bank_code\": \"<string>\",\n        \"address\": \"<string>\"\n      }\n    }\n  ],\n  \"total\": 9527,\n  \"page\": 2010,\n  \"page_size\": 3067\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69a7b3f6-99f4-419d-9dd6-9b955f4bd2ac",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38b67d8b-a93a-4425-ac56-d89cde51d9e4",
+          "name": "Get Payment",
+          "request": {
+            "name": "Get Payment",
+            "description": {
+              "content": "Retrieve details of a specific payment by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                ":paymentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "paymentId",
+                  "description": "(Required) Unique payment identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c48da121-d640-49fd-ad20-92d0ee57cf73",
+              "name": "Payment details returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":paymentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentId",
+                      "description": "(Required) Unique payment identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"completed\",\n  \"amount\": 6255.725645516215,\n  \"sell_currency\": \"string\",\n  \"buy_currency\": \"string\",\n  \"exchange_rate\": 3731.8704402799117,\n  \"buy_amount\": 9470.489760564022,\n  \"payment_reference\": \"string\",\n  \"created_at\": \"1972-11-23T16:12:43.747Z\",\n  \"value_date\": \"2010-08-13\",\n  \"beneficiary\": {\n    \"name\": \"<string>\",\n    \"country\": \"<string>\",\n    \"account_number\": \"<string>\",\n    \"bank_code\": \"<string>\",\n    \"address\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "286f819f-7b5f-4a82-9e27-b525f2cb2170",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":paymentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentId",
+                      "description": "(Required) Unique payment identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2b29beb4-8cb3-42bf-9afd-116c3859a028",
+              "name": "Payment not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":paymentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentId",
+                      "description": "(Required) Unique payment identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.clearing.stonex.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f09a136a-54a8-4471-9698-c951dddffc19",
+    "name": "StoneX Clearing Accounts Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The StoneX Clearing REST API provides programmatic access to accounts, trading, and document management for institutional clearing clients. Uses OAuth 2.0 authentication with JWT tokens (10-hour lifetime). Available in UAT and production environments.",
+      "type": "text/plain"
+    }
+  }
+}

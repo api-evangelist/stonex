@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "StoneX Clearing Accounts Trading API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Trading",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Trades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clearing.stonex.com/trades",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by account ID."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by trade status."
+              },
+              {
+                "name": "from_date",
+                "value": "",
+                "type": "query",
+                "description": "Start date filter."
+              },
+              {
+                "name": "to_date",
+                "value": "",
+                "type": "query",
+                "description": "End date filter."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of trades with optional filtering."
+        },
+        {
+          "info": {
+            "name": "Submit Trade",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.clearing.stonex.com/trades",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a trade for clearing and settlement."
+        },
+        {
+          "info": {
+            "name": "Get Trade",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clearing.stonex.com/trades/:tradeId",
+            "params": [
+              {
+                "name": "tradeId",
+                "value": "",
+                "type": "path",
+                "description": "Trade identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific trade."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

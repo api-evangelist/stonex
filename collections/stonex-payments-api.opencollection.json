@@ -1,0 +1,107 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "StoneX Clearing Accounts Payments API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clearing.stonex.com/payments",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter payments by status."
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Filter by payment currency (ISO 4217)."
+              },
+              {
+                "name": "from_date",
+                "value": "",
+                "type": "query",
+                "description": "Start of date range filter (ISO 8601)."
+              },
+              {
+                "name": "to_date",
+                "value": "",
+                "type": "query",
+                "description": "End of date range filter (ISO 8601)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of payments with optional filtering."
+        },
+        {
+          "info": {
+            "name": "Create Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.clearing.stonex.com/payments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate a cross-border payment in local currency. Supports 140+ currencies and local settlement options globally."
+        },
+        {
+          "info": {
+            "name": "Get Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clearing.stonex.com/payments/:paymentId",
+            "params": [
+              {
+                "name": "paymentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique payment identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific payment by ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "StoneX Clearing Accounts FX Rates API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "FX Rates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get FX Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clearing.stonex.com/rates",
+            "params": [
+              {
+                "name": "sell_currency",
+                "value": "",
+                "type": "query",
+                "description": "Source currency (ISO 4217 code)."
+              },
+              {
+                "name": "buy_currency",
+                "value": "",
+                "type": "query",
+                "description": "Target currency (ISO 4217 code)."
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Amount to convert."
+              }
+            ]
+          },
+          "docs": "Get indicative foreign exchange rates for supported currency pairs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

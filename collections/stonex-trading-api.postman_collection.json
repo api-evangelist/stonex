@@ -1,0 +1,602 @@
+{
+  "item": [
+    {
+      "id": "7631e185-03d2-4953-accd-7ca57fb5ea33",
+      "name": "Trading",
+      "description": {
+        "content": "Trade submission and management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a8b6de5a-a24d-4a6c-82ef-febf6ce818c7",
+          "name": "Submit Trade",
+          "request": {
+            "name": "Submit Trade",
+            "description": {
+              "content": "Submit a trade for clearing and settlement.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trades"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_id\": \"<string>\",\n  \"symbol\": \"<string>\",\n  \"side\": \"<string>\",\n  \"quantity\": \"<number>\",\n  \"price\": \"<number>\",\n  \"trade_date\": \"<date>\",\n  \"settlement_date\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9eb38c8d-806f-4681-b74f-6d756a7ca8d4",
+              "name": "Trade submitted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"<string>\",\n  \"symbol\": \"<string>\",\n  \"side\": \"<string>\",\n  \"quantity\": \"<number>\",\n  \"price\": \"<number>\",\n  \"trade_date\": \"<date>\",\n  \"settlement_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"account_id\": \"string\",\n  \"symbol\": \"string\",\n  \"side\": \"buy\",\n  \"quantity\": 5549.762438978165,\n  \"price\": 1529.5616862353988,\n  \"status\": \"pending\",\n  \"trade_date\": \"1976-05-22\",\n  \"settlement_date\": \"1996-01-16\",\n  \"created_at\": \"1963-08-16T00:04:57.422Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb50b662-b147-479a-848d-886ed2c1d6ef",
+              "name": "Invalid trade request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"<string>\",\n  \"symbol\": \"<string>\",\n  \"side\": \"<string>\",\n  \"quantity\": \"<number>\",\n  \"price\": \"<number>\",\n  \"trade_date\": \"<date>\",\n  \"settlement_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "037f1913-8448-4802-903c-7f63ca0ae73b",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"<string>\",\n  \"symbol\": \"<string>\",\n  \"side\": \"<string>\",\n  \"quantity\": \"<number>\",\n  \"price\": \"<number>\",\n  \"trade_date\": \"<date>\",\n  \"settlement_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "51367392-fef7-44e9-b739-70096251bd6f",
+          "name": "List Trades",
+          "request": {
+            "name": "List Trades",
+            "description": {
+              "content": "Retrieve a list of trades with optional filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trades"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>",
+                  "description": "Filter by account ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by trade status."
+                },
+                {
+                  "disabled": false,
+                  "key": "from_date",
+                  "value": "<date>",
+                  "description": "Start date filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "to_date",
+                  "value": "<date>",
+                  "description": "End date filter."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e9ef3b5d-1657-4c97-b8e6-3d38da994d56",
+              "name": "Trades list returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"account_id\": \"string\",\n      \"symbol\": \"string\",\n      \"side\": \"buy\",\n      \"quantity\": 3008.555759872905,\n      \"price\": 3207.520007121285,\n      \"status\": \"confirmed\",\n      \"trade_date\": \"1961-08-03\",\n      \"settlement_date\": \"1951-05-29\",\n      \"created_at\": \"2004-11-24T19:28:08.497Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"account_id\": \"string\",\n      \"symbol\": \"string\",\n      \"side\": \"buy\",\n      \"quantity\": 3407.6933093802363,\n      \"price\": 3862.735311276341,\n      \"status\": \"settled\",\n      \"trade_date\": \"1948-07-17\",\n      \"settlement_date\": \"1970-08-29\",\n      \"created_at\": \"2002-12-11T12:51:20.376Z\"\n    }\n  ],\n  \"total\": 5106,\n  \"page\": 8763\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2ad3c09-707c-46e8-b8d6-2f544fd0ca9a",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a22ab0f-500b-4125-bd9b-a6fb2cdb4423",
+          "name": "Get Trade",
+          "request": {
+            "name": "Get Trade",
+            "description": {
+              "content": "Retrieve details of a specific trade.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trades",
+                ":tradeId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tradeId",
+                  "description": "(Required) Trade identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5156d70b-844d-4100-a5b5-4724aaefe41f",
+              "name": "Trade details returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trades",
+                    ":tradeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tradeId",
+                      "description": "(Required) Trade identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"account_id\": \"string\",\n  \"symbol\": \"string\",\n  \"side\": \"buy\",\n  \"quantity\": 5549.762438978165,\n  \"price\": 1529.5616862353988,\n  \"status\": \"pending\",\n  \"trade_date\": \"1976-05-22\",\n  \"settlement_date\": \"1996-01-16\",\n  \"created_at\": \"1963-08-16T00:04:57.422Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fcfddd6-6462-44ac-8bb3-f4f188d7c2df",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trades",
+                    ":tradeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tradeId",
+                      "description": "(Required) Trade identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d22f0a31-d451-4acd-b420-bdd3cdf5e0c7",
+              "name": "Trade not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trades",
+                    ":tradeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tradeId",
+                      "description": "(Required) Trade identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.clearing.stonex.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e45eebf8-4243-4e95-ac1f-c140b310055e",
+    "name": "StoneX Clearing Accounts Trading API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The StoneX Clearing REST API provides programmatic access to accounts, trading, and document management for institutional clearing clients. Uses OAuth 2.0 authentication with JWT tokens (10-hour lifetime). Available in UAT and production environments.",
+      "type": "text/plain"
+    }
+  }
+}

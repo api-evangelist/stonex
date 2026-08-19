@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "StoneX Clearing Accounts Authentication API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Authentication Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.clearing.stonex.com/auth/token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Obtain a JWT access token using OAuth 2.0 client credentials. The token is valid for 10 hours and must be passed as a Bearer token in the Authorization header."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

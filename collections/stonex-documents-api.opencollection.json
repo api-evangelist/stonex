@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "StoneX Clearing Accounts Documents API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clearing.stonex.com/documents",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by account ID."
+              },
+              {
+                "name": "document_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by document type."
+              },
+              {
+                "name": "from_date",
+                "value": "",
+                "type": "query",
+                "description": "Start date filter."
+              },
+              {
+                "name": "to_date",
+                "value": "",
+                "type": "query",
+                "description": "End date filter."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of clearing documents."
+        },
+        {
+          "info": {
+            "name": "Get Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clearing.stonex.com/documents/:documentId",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific clearing document."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

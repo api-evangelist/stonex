@@ -1,0 +1,255 @@
+{
+  "item": [
+    {
+      "id": "cc00d7ae-c702-4748-874a-99d23ac9807e",
+      "name": "FX Rates",
+      "description": {
+        "content": "Foreign exchange rate queries.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e7032d13-60fd-43e4-8c1f-a3be204f5941",
+          "name": "Get FX Rates",
+          "request": {
+            "name": "Get FX Rates",
+            "description": {
+              "content": "Get indicative foreign exchange rates for supported currency pairs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sell_currency",
+                  "value": "<string>",
+                  "description": "(Required) Source currency (ISO 4217 code)."
+                },
+                {
+                  "disabled": false,
+                  "key": "buy_currency",
+                  "value": "<string>",
+                  "description": "(Required) Target currency (ISO 4217 code)."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<number>",
+                  "description": "Amount to convert."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dde93412-e657-4264-9e4d-c59b18f72c13",
+              "name": "FX rate returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sell_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "buy_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sell_currency\": \"string\",\n  \"buy_currency\": \"string\",\n  \"rate\": 9173.36327902622,\n  \"timestamp\": \"1970-07-30T02:35:54.883Z\",\n  \"sell_amount\": 8242.695523104976,\n  \"buy_amount\": 5292.1406037742745\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d3cfca8-241a-4c9b-abde-c791bc0f4f0e",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sell_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "buy_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d0e00a00-ce61-46aa-a7b5-841f311bd76b",
+              "name": "Currency pair not supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sell_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "buy_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.clearing.stonex.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bb43ffdc-9c87-49aa-9cbf-8ade1de70477",
+    "name": "StoneX Clearing Accounts FX Rates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The StoneX Clearing REST API provides programmatic access to accounts, trading, and document management for institutional clearing clients. Uses OAuth 2.0 authentication with JWT tokens (10-hour lifetime). Available in UAT and production environments.",
+      "type": "text/plain"
+    }
+  }
+}
