@@ -185,6 +185,9 @@ apis:
   - type: GettingStarted
     url: https://docs.clearing.stonex.com/docs/getting-started/introduction
 common:
+  - type: CapabilityMap
+    url: capabilities/stonex-capability-edges.yml
+    name: StoneX Business Capability Map
   - type: AgenticAccess
     url: agentic-access/stonex-agentic-access.yml
   - type: VulnerabilityDisclosure
