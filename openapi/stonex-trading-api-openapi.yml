@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: StoneX Clearing Accounts Trading API
+  title: StoneX Clearing Trading API
   description: The StoneX Clearing REST API provides programmatic access to accounts, trading, and document management for institutional clearing clients. Uses OAuth 2.0 authentication with JWT tokens (10-hour lifetime). Available in UAT and production environments.
   version: '1.0'
   contact:
@@ -114,40 +114,6 @@ paths:
           description: Trade not found.
 components:
   schemas:
-    TradeRequest:
-      type: object
-      required:
-      - account_id
-      - symbol
-      - side
-      - quantity
-      properties:
-        account_id:
-          type: string
-          description: Account to book the trade against.
-        symbol:
-          type: string
-          description: Instrument symbol.
-        side:
-          type: string
-          enum:
-          - buy
-          - sell
-          description: Trade direction.
-        quantity:
-          type: number
-          description: Trade quantity.
-        price:
-          type: number
-          description: Trade price (required for limit orders).
-        trade_date:
-          type: string
-          format: date
-          description: Trade date.
-        settlement_date:
-          type: string
-          format: date
-          description: Settlement date.
     TradeList:
       type: object
       properties:
@@ -196,6 +162,40 @@ components:
         created_at:
           type: string
           format: date-time
+    TradeRequest:
+      type: object
+      required:
+      - account_id
+      - symbol
+      - side
+      - quantity
+      properties:
+        account_id:
+          type: string
+          description: Account to book the trade against.
+        symbol:
+          type: string
+          description: Instrument symbol.
+        side:
+          type: string
+          enum:
+          - buy
+          - sell
+          description: Trade direction.
+        quantity:
+          type: number
+          description: Trade quantity.
+        price:
+          type: number
+          description: Trade price (required for limit orders).
+        trade_date:
+          type: string
+          format: date
+          description: Trade date.
+        settlement_date:
+          type: string
+          format: date
+          description: Settlement date.
   securitySchemes:
     BearerAuth:
       type: http

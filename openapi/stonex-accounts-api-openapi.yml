@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: StoneX Clearing Accounts API
   description: The StoneX Clearing REST API provides programmatic access to accounts, trading, and document management for institutional clearing clients. Uses OAuth 2.0 authentication with JWT tokens (10-hour lifetime). Available in UAT and production environments.
@@ -134,30 +134,6 @@ components:
         as_of:
           type: string
           format: date-time
-    Position:
-      type: object
-      properties:
-        account_id:
-          type: string
-          description: Account identifier.
-        symbol:
-          type: string
-          description: Instrument symbol.
-        quantity:
-          type: number
-          description: Position size (positive = long, negative = short).
-        average_price:
-          type: number
-          description: Average cost basis.
-        market_price:
-          type: number
-          description: Current market price.
-        market_value:
-          type: number
-          description: Current market value.
-        unrealized_pnl:
-          type: number
-          description: Unrealized profit and loss.
     AccountList:
       type: object
       properties:
@@ -225,6 +201,30 @@ components:
           type: string
           format: date-time
           description: Account creation timestamp.
+    Position:
+      type: object
+      properties:
+        account_id:
+          type: string
+          description: Account identifier.
+        symbol:
+          type: string
+          description: Instrument symbol.
+        quantity:
+          type: number
+          description: Position size (positive = long, negative = short).
+        average_price:
+          type: number
+          description: Average cost basis.
+        market_price:
+          type: number
+          description: Current market price.
+        market_value:
+          type: number
+          description: Current market value.
+        unrealized_pnl:
+          type: number
+          description: Unrealized profit and loss.
   securitySchemes:
     BearerAuth:
       type: http

@@ -1,24 +1,32 @@
 {
   "provider": "stonex",
   "sources": [
-    "stonex-accounts-api-openapi.yml",
-    "stonex-authentication-api-openapi.yml",
-    "stonex-documents-api-openapi.yml",
-    "stonex-fx-rates-api-openapi.yml",
-    "stonex-payments-api-openapi.yml",
-    "stonex-trading-api-openapi.yml"
+    "_original/stonex-clearing-openapi.yml",
+    "_original/stonex-payments-openapi.yml"
   ],
   "outputs": [
     "stonex-accounts-api-openapi.yml",
     "stonex-authentication-api-openapi.yml",
     "stonex-documents-api-openapi.yml",
+    "stonex-trading-api-openapi.yml",
     "stonex-fx-rates-api-openapi.yml",
-    "stonex-payments-api-openapi.yml",
-    "stonex-trading-api-openapi.yml"
+    "stonex-payments-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "stonex-clearing-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "stonex-payments-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "tag 'Authentication' spans 2 source specs (stonex-clearing-openapi.yml, stonex-payments-openapi.yml): per-path servers applied"
+  ],
+  "skipped": [
+    "stonex-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stonex-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stonex-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stonex-fx-rates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stonex-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stonex-trading-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

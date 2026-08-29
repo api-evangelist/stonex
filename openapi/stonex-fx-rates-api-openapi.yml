@@ -1,15 +1,15 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: StoneX Clearing Accounts FX Rates API
-  description: The StoneX Clearing REST API provides programmatic access to accounts, trading, and document management for institutional clearing clients. Uses OAuth 2.0 authentication with JWT tokens (10-hour lifetime). Available in UAT and production environments.
+  title: StoneX Payments FX Rates API
+  description: 'The StoneX Payments REST API enables cross-border payment processing in 140+ currencies with local currency acceptance and settlement. Uses Bearer token authentication over HTTPS with TLS 1.3. ISO standards are used throughout: ISO 4217 currency codes, ISO 3166 country codes, ISO 8601 timestamps.'
   version: '1.0'
   contact:
-    url: https://docs.clearing.stonex.com/
+    url: https://docs.payments.stonex.io/
 servers:
-- url: https://api.clearing.stonex.com
-  description: StoneX Clearing Production
-- url: https://api.clearing.uat.stonex.com
-  description: StoneX Clearing UAT (Test)
+- url: https://fx-api.payments.stonex.com
+  description: StoneX Payments Production
+- url: https://api.sandbox.payments.stonex.com
+  description: StoneX Payments Sandbox (UAT)
 security:
 - BearerAuth: []
 tags:
@@ -81,4 +81,4 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
-      description: JWT token from /auth/token endpoint. Valid for 10 hours.
+      description: JWT token obtained from the /auth/token endpoint. Valid for 10 hours.
