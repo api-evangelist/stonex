@@ -5,6 +5,17 @@ description: >-
   intelligence, and post-trade services across asset classes and markets to institutional, commercial, and retail
   clients. StoneX offers REST APIs for payments, clearing, and futures trading with OAuth 2.0 authentication.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
