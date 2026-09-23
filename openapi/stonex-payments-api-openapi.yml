@@ -129,6 +129,32 @@ paths:
           description: Payment not found.
 components:
   schemas:
+    CreatePaymentRequest:
+      type: object
+      required:
+      - amount
+      - sell_currency
+      - buy_currency
+      - beneficiary
+      properties:
+        amount:
+          type: number
+          description: Payment amount.
+        sell_currency:
+          type: string
+          description: Source currency code (ISO 4217).
+        buy_currency:
+          type: string
+          description: Destination currency code (ISO 4217).
+        beneficiary:
+          $ref: '#/components/schemas/Beneficiary'
+        payment_reference:
+          type: string
+          description: Reference for the payment.
+        value_date:
+          type: string
+          format: date
+          description: Desired value date for the payment.
     PaymentList:
       type: object
       properties:
@@ -188,32 +214,6 @@ components:
           description: Settlement value date.
         beneficiary:
           $ref: '#/components/schemas/Beneficiary'
-    CreatePaymentRequest:
-      type: object
-      required:
-      - amount
-      - sell_currency
-      - buy_currency
-      - beneficiary
-      properties:
-        amount:
-          type: number
-          description: Payment amount.
-        sell_currency:
-          type: string
-          description: Source currency code (ISO 4217).
-        buy_currency:
-          type: string
-          description: Destination currency code (ISO 4217).
-        beneficiary:
-          $ref: '#/components/schemas/Beneficiary'
-        payment_reference:
-          type: string
-          description: Reference for the payment.
-        value_date:
-          type: string
-          format: date
-          description: Desired value date for the payment.
     Beneficiary:
       type: object
       required:
