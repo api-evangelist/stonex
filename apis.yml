@@ -33,7 +33,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/stonex.png
 tags:
   - Finance
-  - Financial-Services
+  - Financial Services
   - Payments
   - Clearing
   - Futures
@@ -47,6 +47,7 @@ tags_raw:
   - Futures
   - Trading
   - Risk Management
+  - Financial-Services
 url: https://raw.githubusercontent.com/api-evangelist/stonex/refs/heads/main/apis.yml
 created: '2026-05-02'
 modified: '2026-05-19'
