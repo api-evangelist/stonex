@@ -114,6 +114,17 @@ paths:
           description: Trade not found.
 components:
   schemas:
+    TradeList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Trade'
+        total:
+          type: integer
+        page:
+          type: integer
     Trade:
       type: object
       properties:
@@ -185,17 +196,6 @@ components:
           type: string
           format: date
           description: Settlement date.
-    TradeList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Trade'
-        total:
-          type: integer
-        page:
-          type: integer
   securitySchemes:
     BearerAuth:
       type: http

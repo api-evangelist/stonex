@@ -122,6 +122,30 @@ paths:
           description: Account not found.
 components:
   schemas:
+    Position:
+      type: object
+      properties:
+        account_id:
+          type: string
+          description: Account identifier.
+        symbol:
+          type: string
+          description: Instrument symbol.
+        quantity:
+          type: number
+          description: Position size (positive = long, negative = short).
+        average_price:
+          type: number
+          description: Average cost basis.
+        market_price:
+          type: number
+          description: Current market price.
+        market_value:
+          type: number
+          description: Current market value.
+        unrealized_pnl:
+          type: number
+          description: Unrealized profit and loss.
     Account:
       type: object
       properties:
@@ -160,43 +184,6 @@ components:
         as_of:
           type: string
           format: date-time
-    Position:
-      type: object
-      properties:
-        account_id:
-          type: string
-          description: Account identifier.
-        symbol:
-          type: string
-          description: Instrument symbol.
-        quantity:
-          type: number
-          description: Position size (positive = long, negative = short).
-        average_price:
-          type: number
-          description: Average cost basis.
-        market_price:
-          type: number
-          description: Current market price.
-        market_value:
-          type: number
-          description: Current market value.
-        unrealized_pnl:
-          type: number
-          description: Unrealized profit and loss.
-    AccountList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Account'
-        total:
-          type: integer
-        page:
-          type: integer
-        page_size:
-          type: integer
     Balance:
       type: object
       properties:
@@ -225,6 +212,19 @@ components:
           type: string
           format: date-time
           description: Balance timestamp.
+    AccountList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        total:
+          type: integer
+        page:
+          type: integer
+        page_size:
+          type: integer
   securitySchemes:
     BearerAuth:
       type: http
