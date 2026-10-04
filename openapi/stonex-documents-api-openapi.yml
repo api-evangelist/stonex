@@ -86,15 +86,6 @@ paths:
           description: Document not found.
 components:
   schemas:
-    DocumentList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Document'
-        total:
-          type: integer
     Document:
       type: object
       properties:
@@ -115,6 +106,15 @@ components:
           type: string
           format: uri
           description: Download URL for the document.
+    DocumentList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+        total:
+          type: integer
   securitySchemes:
     BearerAuth:
       type: http

@@ -195,6 +195,22 @@ components:
         address:
           type: string
           description: Beneficiary address.
+    PaymentList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment'
+        total:
+          type: integer
+          description: Total number of payments matching the filter.
+        page:
+          type: integer
+          description: Current page number.
+        page_size:
+          type: integer
+          description: Number of results per page.
     CreatePaymentRequest:
       type: object
       required:
@@ -221,22 +237,6 @@ components:
           type: string
           format: date
           description: Desired value date for the payment.
-    PaymentList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Payment'
-        total:
-          type: integer
-          description: Total number of payments matching the filter.
-        page:
-          type: integer
-          description: Current page number.
-        page_size:
-          type: integer
-          description: Number of results per page.
   securitySchemes:
     BearerAuth:
       type: http
