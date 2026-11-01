@@ -1,4 +1,4 @@
-# StoneX (stonex)
+# StoneX
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,126 +66,167 @@
 
 StoneX Group is a global financial services organization that provides execution, risk management, market intelligence, and post-trade services across asset classes and markets to institutional, commercial, and retail clients. StoneX offers REST APIs for payments, clearing, and futures trading with OAuth 2.0 authentication.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/stonex/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/stonex/refs/heads/main/apis.yml)
+**Areas:** Finance · Financial Services · Payments · Clearing · Futures · Trading · Risk Management
 
-## Scope
+## StoneX on APIs.io
 
-- **Type:** Index
+Everything profiled for StoneX is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/stonex/](https://apis.io/providers/stonex/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (8)
 
-- Finance
-- Financial Services
-- Payments
-- Clearing
-- Futures
-- Trading
-- Risk Management
+- [StoneX GF Futures API](https://apis.io/apis/stonex/stonex-gf-api/) — The StoneX GF (GAIN Futures) API provides institutional-grade access to futures trading including market data, order management, account and position…
+- [StoneX Developer Portal](https://apis.io/apis/stonex/stonex-developer-portal/) — The StoneX Developer Storefront provides access to all StoneX API products with subscription keys, documentation, and developer resources for integrating…
+- [StoneX Accounts API](https://apis.io/apis/stonex/stonex-accounts-api/) — Account information and management.
+- [StoneX Authentication API](https://apis.io/apis/stonex/stonex-authentication-api/) — OAuth 2.0 token management.
+- [StoneX Documents API](https://apis.io/apis/stonex/stonex-documents-api/) — Document retrieval and management.
+- [StoneX FX Rates API](https://apis.io/apis/stonex/stonex-fx-rates-api/) — Foreign exchange rate queries.
+- [StoneX Payments API](https://apis.io/apis/stonex/stonex-payments-api/) — Payment execution and management.
+- [StoneX Trading API](https://apis.io/apis/stonex/stonex-trading-api/) — Trade submission and management.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-02
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### StoneX Payments API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The StoneX Payments REST API enables cross-border payment processing in 140+ currencies with local currency acceptance and settlement. Uses Bearer token authentication over HTTPS with TLS 1.3. Available in sandbox and production environments.
+- [Stonex Agentic Access](https://apis.io/agentic-access/stonex/stonex-agentic-access/)
 
-- **Human URL:** [https://docs.payments.stonex.io/](https://docs.payments.stonex.io/)
+#### JSON Schema (2)
 
-#### Tags
+The data models the API reads and writes.
 
-- Payments
-- Cross-Border Payments
-- FX
-- REST
+- [StoneX Clearing Account](https://apis.io/schemas/stonex/stonex-clearing-account/)
+- [StoneX Payment](https://apis.io/schemas/stonex/stonex-payment/)
 
-#### Properties
+#### JSON Structure (1)
 
-- [Documentation](https://docs.payments.stonex.io/)
-- [Getting Started](https://docs.payments.stonex.io/docs/quickstart-guide-1)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/stonex/refs/heads/main/openapi/stonex-payments-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/stonex-clearing.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/stonex-clearing.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/stonex-payments.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/stonex-payments.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Data models expressed in JSON Structure.
 
-### StoneX Clearing API
+- [Stonex Payment Structure](https://apis.io/json-structure/stonex/stonex-payment-structure/)
 
-The StoneX Clearing REST API provides programmatic access to accounts, trading, and document management for clearing clients. Supports OAuth 2.0 authentication with JWT tokens. Available in UAT (api.clearing.uat.stonex.com) and production (api.clearing.stonex.com).
+#### JSON-LD (1)
 
-- **Human URL:** [https://docs.clearing.stonex.com/](https://docs.clearing.stonex.com/)
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Stonex Context](https://apis.io/jsonld/stonex/stonex-context/)
 
-- Clearing
-- Trading
-- Accounts
-- REST
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://docs.clearing.stonex.com/docs)
-- [Getting Started](https://docs.clearing.stonex.com/docs/getting-started/introduction)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/stonex/refs/heads/main/openapi/stonex-clearing-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/stonex-clearing.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/stonex-clearing.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/stonex-payments.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/stonex-payments.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [StoneX Vocabulary](https://apis.io/vocabularies/stonex/stonex-vocabulary/)
 
-### StoneX GF Futures API
+#### Examples (1)
 
-The StoneX GF (GAIN Futures) API provides institutional-grade access to futures trading including market data, order management, account and position tracking, margin calculations, contract lookup, and real-time price feeds for futures contracts.
+Example requests and responses.
 
-- **Human URL:** [https://futures-media.stonex.com/gfapi/index.html](https://futures-media.stonex.com/gfapi/index.html)
+- [Stonex Create Payment Example](https://apis.io/examples/stonex/stonex-create-payment-example/)
 
-#### Tags
+#### Collections (8)
 
-- Futures
-- Trading
-- Market Data
-- Institutional
+Postman and Open Collection request collections.
 
-#### Properties
+- [StoneX Clearing Accounts API](https://apis.io/collections/stonex/open-stonex-accounts-api/)
+- [StoneX Clearing Accounts Authentication API](https://apis.io/collections/stonex/open-stonex-authentication-api/)
+- [StoneX Clearing API](https://apis.io/collections/stonex/open-stonex-clearing/)
+- [StoneX Clearing Accounts Documents API](https://apis.io/collections/stonex/open-stonex-documents-api/)
+- [StoneX Clearing Accounts FX Rates API](https://apis.io/collections/stonex/open-stonex-fx-rates-api/)
+- [StoneX Payments API](https://apis.io/collections/stonex/open-stonex-payments/)
+- [StoneX Clearing Accounts Payments API](https://apis.io/collections/stonex/open-stonex-payments-api/)
+- [StoneX Clearing Accounts Trading API](https://apis.io/collections/stonex/open-stonex-trading-api/)
 
-- [Documentation](https://futures-media.stonex.com/gfapi/index.html)
-- [Postman Collection](collections/stonex-clearing.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/stonex-clearing.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/stonex-payments.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/stonex-payments.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Governance rules (2)
 
-### StoneX Developer Portal
+Spectral rulesets for the provider's contracts.
 
-The StoneX Developer Storefront provides access to all StoneX API products with subscription keys, documentation, and developer resources for integrating with StoneX financial services.
+- [StoneX — jsonschema rules](https://apis.io/rules/stonex/stonex-jsonschema-spectral-rules/)
+- [StoneX API Rules](https://apis.io/rules/stonex/stonex-rules/)
 
-- **Human URL:** [https://developer.stonex.com/](https://developer.stonex.com/)
+#### Security (3)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- Developer Portal
-- API Management
+- [Stonex Authentication](https://apis.io/security/stonex/stonex-authentication/)
+- [Stonex Domain Security](https://apis.io/security/stonex/stonex-domain-security/)
+- [Stonex Vulnerability Disclosure](https://apis.io/security/stonex/stonex-vulnerability-disclosure/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://developer.stonex.com/documentation)
-- [Products](https://developer.stonex.com/products)
-- [Postman Collection](collections/stonex-clearing.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/stonex-clearing.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/stonex-payments.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/stonex-payments.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published plans, tiers and prices.
 
-## Common Properties
+- [Stonex Plans Pricing](https://apis.io/plans/stonex/stonex-plans-pricing/)
 
-- [GitHub Organization](https://github.com/stonex)
-- [LinkedIn](https://www.linkedin.com/company/stonex-group)
+#### Rate limits (1)
+
+Published request limits.
+
+- [Stonex Rate Limits](https://apis.io/rate-limits/stonex/stonex-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Stonex Finops](https://apis.io/finops/stonex/stonex-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.stonex.com)
-- [Developer  Portal](https://developer.stonex.com/)
 - [Documentation](https://developer.stonex.com/documentation)
-- [L L Ms Txt](https://developer.stonex.com/llms.txt)
+- [GitHub](https://github.com/stonex)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 30.1** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 55.5 |
+| Contract governance | 13.6 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 33.3 |
+| Access clarity | 5.3 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.5** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/stonex/](https://apis.io/providers/stonex/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for StoneX: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/stonex/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
